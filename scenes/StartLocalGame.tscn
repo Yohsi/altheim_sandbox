@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://styles/background_style.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/title.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scripts/StartLocalGame.gd" type="Script" id=4]
+
+[sub_resource type="InputEventAction" id=1]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[node name="Root" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -387.334, -201.523 )
+mouse_filter = 1
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="header" type="HBoxContainer" parent="."]
+margin_right = 1900.0
+margin_bottom = 67.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_btn" type="Button" parent="header"]
+margin_right = 90.0
+margin_bottom = 67.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+custom_fonts/font = ExtResource( 3 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 2 )
+text = "<"
+
+[node name="title" type="Label" parent="header"]
+margin_left = 94.0
+margin_top = 3.0
+margin_right = 1900.0
+margin_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Jouer en local"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="deck_selector1" type="VBoxContainer" parent="."]
+anchor_left = 0.379118
+anchor_top = 0.503421
+anchor_right = 0.62511
+anchor_bottom = 0.645612
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="label" type="Label" parent="deck_selector1"]
+margin_right = 472.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sélection de votre deck"
+
+[node name="select" type="OptionButton" parent="deck_selector1"]
+margin_top = 38.0
+margin_right = 472.0
+margin_bottom = 78.0
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="deck_selector2" type="VBoxContainer" parent="."]
+anchor_left = 0.377366
+anchor_top = 0.252709
+anchor_right = 0.623358
+anchor_bottom = 0.3949
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="label" type="Label" parent="deck_selector2"]
+margin_right = 472.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sélection du deck adverse"
+
+[node name="select" type="OptionButton" parent="deck_selector2"]
+margin_top = 38.0
+margin_right = 472.0
+margin_bottom = 78.0
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start_btn" type="Button" parent="."]
+margin_left = 758.0
+margin_top = 803.0
+margin_right = 1177.0
+margin_bottom = 863.0
+custom_fonts/font = ExtResource( 2 )
+text = "Démarrer la partie !"
+__meta__ = {
+"_edit_use_anchors_": false
+}

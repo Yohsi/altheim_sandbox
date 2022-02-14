@@ -1,0 +1,651 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://styles/background_style.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/CardView.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Asul-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/HealthLabel.gd" type="Script" id=5]
+
+[sub_resource type="InputEventAction" id=32]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=33]
+shortcut = SubResource( 32 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=17]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=25]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=27]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=28]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=29]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="StyleBoxFlat" id=30]
+resource_local_to_scene = true
+resource_name = "CardViewStyle"
+draw_center = false
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+
+[sub_resource type="DynamicFont" id=31]
+size = 62
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="game" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_styles/panel = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Button" parent="."]
+margin_right = 42.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+shortcut_in_tooltip = false
+shortcut = SubResource( 33 )
+text = "<"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="copy_deck" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 20.1298
+margin_top = -21.0
+margin_right = 177.13
+margin_bottom = 21.0
+mouse_default_cursor_shape = 2
+shortcut_in_tooltip = false
+text = "Copier le deck adverse"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="place_1" parent="." instance=ExtResource( 3 )]
+margin_left = 384.0
+margin_top = 368.794
+margin_right = 773.0
+margin_bottom = 911.794
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 1 )
+
+[node name="place_2" parent="." instance=ExtResource( 3 )]
+margin_left = 536.0
+margin_top = 368.794
+margin_right = 925.0
+margin_bottom = 911.794
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 2 )
+
+[node name="place_3" parent="." instance=ExtResource( 3 )]
+margin_left = 688.0
+margin_top = 368.794
+margin_right = 1077.0
+margin_bottom = 911.794
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 3 )
+
+[node name="place_4" parent="." instance=ExtResource( 3 )]
+margin_left = 840.0
+margin_top = 368.794
+margin_right = 1229.0
+margin_bottom = 911.794
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 4 )
+
+[node name="place_5" parent="." instance=ExtResource( 3 )]
+margin_left = 992.0
+margin_top = 368.794
+margin_right = 1381.0
+margin_bottom = 911.794
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 5 )
+
+[node name="place_6" parent="." instance=ExtResource( 3 )]
+margin_left = 384.0
+margin_top = 564.886
+margin_right = 773.0
+margin_bottom = 1107.89
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 6 )
+
+[node name="place_7" parent="." instance=ExtResource( 3 )]
+margin_left = 536.0
+margin_top = 565.036
+margin_right = 925.0
+margin_bottom = 1108.04
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 7 )
+
+[node name="place_8" parent="." instance=ExtResource( 3 )]
+margin_left = 688.0
+margin_top = 564.886
+margin_right = 1077.0
+margin_bottom = 1107.89
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 8 )
+
+[node name="place_9" parent="." instance=ExtResource( 3 )]
+margin_left = 840.0
+margin_top = 564.886
+margin_right = 1229.0
+margin_bottom = 1107.89
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 9 )
+
+[node name="place_10" parent="." instance=ExtResource( 3 )]
+margin_left = 992.0
+margin_top = 564.886
+margin_right = 1381.0
+margin_bottom = 1107.89
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 10 )
+
+[node name="place_11" parent="." instance=ExtResource( 3 )]
+margin_left = 488.0
+margin_top = 734.198
+margin_right = 877.0
+margin_bottom = 1277.2
+rect_rotation = -89.9975
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 11 )
+
+[node name="place_12" parent="." instance=ExtResource( 3 )]
+margin_left = 688.0
+margin_top = 734.048
+margin_right = 1077.0
+margin_bottom = 1277.05
+rect_rotation = -89.9975
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 12 )
+
+[node name="place_13" parent="." instance=ExtResource( 3 )]
+margin_left = 888.0
+margin_top = 734.048
+margin_right = 1277.0
+margin_bottom = 1277.05
+rect_rotation = -89.9975
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 13 )
+
+[node name="place_14" parent="." instance=ExtResource( 3 )]
+margin_left = -62.0
+margin_top = 784.0
+margin_right = 327.0
+margin_bottom = 1327.0
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 14 )
+
+[node name="place_15" parent="." instance=ExtResource( 3 )]
+margin_left = 2.0
+margin_top = 784.0
+margin_right = 391.0
+margin_bottom = 1327.0
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 15 )
+
+[node name="place_16" parent="." instance=ExtResource( 3 )]
+margin_left = 384.0
+margin_top = 165.562
+margin_right = 773.0
+margin_bottom = 708.562
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 16 )
+
+[node name="place_17" parent="." instance=ExtResource( 3 )]
+margin_left = 536.0
+margin_top = 165.562
+margin_right = 925.0
+margin_bottom = 708.562
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 17 )
+
+[node name="place_18" parent="." instance=ExtResource( 3 )]
+margin_left = 688.0
+margin_top = 165.562
+margin_right = 1077.0
+margin_bottom = 708.562
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 18 )
+
+[node name="place_19" parent="." instance=ExtResource( 3 )]
+margin_left = 840.0
+margin_top = 165.562
+margin_right = 1229.0
+margin_bottom = 708.562
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 19 )
+
+[node name="place_20" parent="." instance=ExtResource( 3 )]
+margin_left = 992.0
+margin_top = 165.562
+margin_right = 1381.0
+margin_bottom = 708.562
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 20 )
+
+[node name="place_21" parent="." instance=ExtResource( 3 )]
+margin_left = 384.0
+margin_top = -29.9761
+margin_right = 773.0
+margin_bottom = 513.024
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 21 )
+
+[node name="place_22" parent="." instance=ExtResource( 3 )]
+margin_left = 536.0
+margin_top = -29.826
+margin_right = 925.0
+margin_bottom = 513.174
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 22 )
+
+[node name="place_23" parent="." instance=ExtResource( 3 )]
+margin_left = 688.0
+margin_top = -29.9761
+margin_right = 1077.0
+margin_bottom = 513.024
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 23 )
+
+[node name="place_24" parent="." instance=ExtResource( 3 )]
+margin_left = 840.0
+margin_top = -29.9761
+margin_right = 1229.0
+margin_bottom = 513.024
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 24 )
+
+[node name="place_25" parent="." instance=ExtResource( 3 )]
+margin_left = 992.0
+margin_top = -29.9761
+margin_right = 1381.0
+margin_bottom = 513.024
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 25 )
+
+[node name="place_26" parent="." instance=ExtResource( 3 )]
+margin_left = 488.0
+margin_top = -197.816
+margin_right = 877.0
+margin_bottom = 345.184
+rect_rotation = -89.9975
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 26 )
+
+[node name="place_27" parent="." instance=ExtResource( 3 )]
+margin_left = 688.0
+margin_top = -197.966
+margin_right = 1077.0
+margin_bottom = 345.034
+rect_rotation = -89.9975
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 27 )
+
+[node name="place_28" parent="." instance=ExtResource( 3 )]
+margin_left = 888.0
+margin_top = -197.966
+margin_right = 1277.0
+margin_bottom = 345.034
+rect_rotation = -89.9975
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 28 )
+
+[node name="place_29" parent="." instance=ExtResource( 3 )]
+margin_left = -60.1
+margin_top = -256.15
+margin_right = 328.9
+margin_bottom = 286.852
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 29 )
+
+[node name="place_30" parent="." instance=ExtResource( 3 )]
+margin_left = 3.89999
+margin_top = -256.15
+margin_right = 392.9
+margin_bottom = 286.852
+rect_scale = Vector2( 0.35, 0.35 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 30 )
+
+[node name="health_own" type="Label" parent="."]
+margin_left = 344.0
+margin_top = 1000.0
+margin_right = 425.0
+margin_bottom = 1076.0
+mouse_filter = 1
+custom_fonts/font = SubResource( 31 )
+text = "20"
+script = ExtResource( 5 )
+
+[node name="health_other" type="Label" parent="."]
+margin_left = 344.0
+margin_right = 425.0
+margin_bottom = 76.0
+mouse_filter = 1
+custom_fonts/font = SubResource( 31 )
+text = "20"
+script = ExtResource( 5 )

@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/RoomEntry.gd" type="Script" id=2]
+
+[node name="room_entry" type="HBoxContainer"]
+rect_min_size = Vector2( 500, 0 )
+alignment = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IP" type="Label" parent="."]
+margin_top = 3.0
+margin_right = 164.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "IP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Code" type="Label" parent="."]
+margin_left = 168.0
+margin_top = 3.0
+margin_right = 332.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Code"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Connect_btn" type="Button" parent="."]
+margin_left = 407.0
+margin_right = 500.0
+margin_bottom = 40.0
+size_flags_horizontal = 10
+custom_fonts/font = ExtResource( 1 )
+text = "Rejoindre"
