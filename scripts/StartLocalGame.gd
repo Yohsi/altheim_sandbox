@@ -2,12 +2,13 @@ extends Panel
 
 func on_start_pressed():
 	var scene = load("res://scenes/Game.tscn").instance()
-	scene.deck1 = $deck_selector1/select.get_selected_metadata()
-	scene.deck2 = $deck_selector2/select.get_selected_metadata()
-	scene.local_game = true
-	var root = get_tree().get_root()
-	Util.delete_children(root)
-	root.add_child(scene)
+	var deck1 = $deck_selector1/select.get_selected_metadata().duplicate()
+	deck1.shuffle()
+	var deck2 = $deck_selector2/select.get_selected_metadata().duplicate()
+	deck2.shuffle()
+	get_node("/root/local_menu").queue_free()
+	get_tree().get_root().add_child(scene)
+	scene.setup({0: deck1, 1: deck2})
 
 func back_btn_pressed():
 	get_tree().change_scene("res://scenes/Main.tscn")

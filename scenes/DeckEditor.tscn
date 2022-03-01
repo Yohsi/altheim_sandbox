@@ -372,6 +372,7 @@ margin_right = 893.0
 margin_bottom = 709.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
+wrap_enabled = true
 
 [node name="preview" type="VBoxContainer" parent="content/workspace"]
 margin_left = 897.0

@@ -18,6 +18,8 @@ var visible_by = VisibleBy.NOBODY
 var rotated_landscape = false
 var local_game = false setget set_local_game
 
+var opponent_id: int # the id of the remote player (not related to the card ownership)
+
 func set_local_game(b):
 	local_game = b
 	if local_game:
@@ -29,27 +31,23 @@ func set_card(new_card) -> void:
 
 func rpc_or_call(f, arg = null):
 	if arg == null:
-		if local_game:
-			call(f)
-		else:
-			rpc(f)
+		call(f)
+		if not local_game and not preview:
+			rpc_id(opponent_id, f)
 	else:
-		if local_game:
-			call(f, arg)
-		else:
-			rpc(f, arg)
+		call(f, arg)
+		if not local_game and not preview:
+			rpc_id(opponent_id, f, arg)
 
 func rpc_unreliable_or_call(f, arg = null):
 	if arg == null:
-		if local_game:
-			call(f)
-		else:
-			rpc_unreliable(f)
+		call(f)
+		if not local_game and not preview:
+			rpc_unreliable_id(opponent_id, f)
 	else:
-		if local_game:
-			call(f, arg)
-		else:
-			rpc_unreliable(f, arg)
+		call(f, arg)
+		if not local_game and not preview:
+			rpc_unreliable_id(opponent_id, f, arg)
 
 func update_card_info():
 	if (card == null):
@@ -80,13 +78,18 @@ func update_card_info():
 	$card/front/background.color = card.color
 
 
-func setup(p_card, visibility, p_preview = false) -> void:
+func setup_preview(p_card):
+	self.visible_by = VisibleBy.BOTH
+	self.preview = true
+	$card/front/visibity_indicator.visible = false
+	flip_card(true)
+	self.card = p_card
+
+func setup(p_card, visibility, p_opponent_id) -> void:
+	self.opponent_id = p_opponent_id
 	self.visible_by = visibility
-	self.preview = p_preview
-	if p_preview:
-		$card/front/visibity_indicator.visible = false
-		flip_card(true)
-	elif visibility != VisibleBy.NOBODY:
+	self.preview = false
+	if visibility != VisibleBy.NOBODY:
 		update_visibility()
 	self.card = p_card
 
@@ -114,7 +117,7 @@ func to_the_left(v: Vector2) -> bool:
 		pos.y = pos.y - size.y
 	return Rect2(pos, size).has_point(v)
 
-remotesync func raise_card():
+remote func raise_card():
 	raise()
 	emit_signal("raise_preview")
 
@@ -227,7 +230,7 @@ func update_visibility():
 		VisibleBy.NOBODY:
 			rpc_or_call("flip_card", false)
 
-remotesync func flip_card(visible: bool):
+remote func flip_card(visible: bool):
 	visible_by = VisibleBy.BOTH if visible else VisibleBy.NOBODY
 	$card/back.visible = not visible
 	$card/front.visible = visible
@@ -235,19 +238,17 @@ remotesync func flip_card(visible: bool):
 		$card/front/visibity_indicator.set("custom_colors/font_color", Color("58f74f"))
 		$card/front/visibity_indicator.text = "Visible"
 
-remotesync func set_card_position(pos:Vector2):
+remote func set_card_position(pos:Vector2):
 	if not local_game:
-		var id = get_tree().get_rpc_sender_id()
-		var our_id = get_tree().get_network_unique_id()
-		if id != our_id:
+		if get_tree().get_rpc_sender_id() == opponent_id:
 			pos.y = get_parent().rect_size.y - pos.y - rect_size.y
 	set_position(pos)
 
-remotesync func rotate_card(landscape: bool):
+remote func rotate_card(landscape: bool):
 	rotated_landscape = landscape
 	set_rotation(-PI/2 if landscape else 0.0)
 
-remotesync func add_def(amount: int):
+remote func add_def(amount: int):
 	var new_def = int($card/front/def.text) + amount
 	$card/front/def.text = str(new_def)
 	var color
@@ -259,7 +260,7 @@ remotesync func add_def(amount: int):
 		color = Color.black
 	$card/front/def.set("custom_colors/font_color", color)
 
-remotesync func add_atk(amount: int):
+remote func add_atk(amount: int):
 	var new_atk = int($card/front/atk.text) + amount
 	$card/front/atk.text = str(new_atk)
 	var color

@@ -13,7 +13,7 @@ action = "ui_cancel"
 [sub_resource type="ShortCut" id=2]
 shortcut = SubResource( 1 )
 
-[node name="root" type="Panel"]
+[node name="lan_menu" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 5 )
@@ -144,6 +144,7 @@ margin_top = 38.0
 margin_right = 472.0
 margin_bottom = 78.0
 custom_fonts/font = ExtResource( 6 )
+text = "Objet 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }

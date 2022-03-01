@@ -1,13 +1,13 @@
 extends NetworkSync
 
-var _game_network_sync
-
 func _on_update_players_list():
 	if len($EasyLANHost.players_connected) == 1:
 		$EasyLANHost.stop_broadcast()
-		var ids = $EasyLANHost.players_connected
-		ids.append(get_tree().get_network_unique_id())
-		.rpc("start_game")
+		var deck = $deck_selector/select.get_selected_metadata().duplicate()
+		deck.shuffle()
+		var id = get_tree().get_network_unique_id()	
+		.rpc("set_opponent_info", id, deck)
+		set_our_info(id, deck)
 
 func back_btn_pressed():
 	get_tree().change_scene("res://scenes/Main.tscn")

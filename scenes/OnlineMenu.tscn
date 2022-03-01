@@ -1,0 +1,214 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/OnlineMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/header.tres" type="DynamicFont" id=3]
+[ext_resource path="res://styles/background_style.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=5]
+
+[sub_resource type="InputEventAction" id=1]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.113725, 0.113725, 0.113725, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.121569, 0.607843, 1, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+shadow_color = Color( 0, 0, 0, 0.235294 )
+shadow_size = 23
+anti_aliasing_size = 5
+
+[node name="online_menu" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 4 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="header" type="HBoxContainer" parent="."]
+margin_right = 1900.0
+margin_bottom = 67.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_btn" type="Button" parent="header"]
+margin_right = 90.0
+margin_bottom = 67.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+custom_fonts/font = ExtResource( 2 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 2 )
+text = "<"
+
+[node name="title" type="Label" parent="header"]
+margin_left = 94.0
+margin_top = 3.0
+margin_right = 1900.0
+margin_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Jouer en ligne"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu" type="VBoxContainer" parent="."]
+anchor_left = 0.435312
+anchor_top = 0.103185
+anchor_right = 0.895396
+anchor_bottom = 0.935185
+margin_left = -0.320007
+margin_top = -0.440002
+margin_right = 0.319946
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+custom_constants/separation = 29
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="header" type="Label" parent="menu"]
+margin_right = 884.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 3 )
+text = "Parties disponibles"
+
+[node name="rooms" type="VBoxContainer" parent="menu"]
+margin_top = 66.0
+margin_right = 884.0
+margin_bottom = 770.0
+size_flags_vertical = 3
+custom_constants/separation = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="create_game_btn" type="Button" parent="menu"]
+margin_top = 799.0
+margin_right = 884.0
+margin_bottom = 899.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 2 )
+text = "Créer une partie"
+
+[node name="deck_selector" type="VBoxContainer" parent="."]
+anchor_left = 0.0637823
+anchor_top = 0.237137
+anchor_right = 0.309774
+anchor_bottom = 0.379328
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="label" type="Label" parent="deck_selector"]
+margin_right = 472.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 5 )
+text = "Sélection du deck"
+
+[node name="select" type="OptionButton" parent="deck_selector"]
+margin_top = 38.0
+margin_right = 472.0
+margin_bottom = 78.0
+custom_fonts/font = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="popup_back" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.498039 )
+
+[node name="popup" type="PopupDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -276.0
+margin_top = -153.0
+margin_right = 276.0
+margin_bottom = 154.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin" type="MarginContainer" parent="popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cont" type="VBoxContainer" parent="popup/margin"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 527.0
+margin_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 27
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="popup/margin/cont"]
+margin_top = 27.0
+margin_right = 502.0
+margin_bottom = 88.0
+custom_fonts/font = ExtResource( 2 )
+text = "Nom de la partie"
+align = 1
+
+[node name="name" type="LineEdit" parent="popup/margin/cont"]
+margin_top = 115.0
+margin_right = 502.0
+margin_bottom = 159.0
+focus_next = NodePath("../ok")
+focus_previous = NodePath("../ok")
+size_flags_stretch_ratio = 0.53
+custom_fonts/font = ExtResource( 5 )
+
+[node name="ok" type="Button" parent="popup/margin/cont"]
+margin_left = 230.0
+margin_top = 186.0
+margin_right = 272.0
+margin_bottom = 229.0
+focus_next = NodePath("../name")
+focus_previous = NodePath("../name")
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 3 )
+text = "OK"
+__meta__ = {
+"_edit_use_anchors_": false
+}

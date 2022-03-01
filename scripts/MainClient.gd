@@ -2,8 +2,6 @@ extends NetworkSync
 
 onready var GameRoomNameEntry = preload("res://scenes/RoomEntry.tscn")
 
-var _game_network_sync
-
 func _on_update_servers_list():
 	for child in $rooms/list.get_children():
 		child.queue_free()
@@ -19,6 +17,13 @@ func _on_update_servers_list():
 func _on_connect_pressed(code):
 	$EasyLANClient.connect_to_server_code(code)
 
+func _on_connection_ok():
+	var deck = $deck_selector/select.get_selected_metadata().duplicate()
+	deck.shuffle()
+	var id = get_tree().get_network_unique_id()	
+	.rpc("set_opponent_info", id, deck)
+	set_our_info(id, deck)
+
 func back_btn_pressed():
 	get_tree().change_scene("res://scenes/Main.tscn")
 
@@ -29,6 +34,7 @@ func _notification(what):
 func _ready():
 	$EasyLANClient.setup()
 	$EasyLANClient.connect("update_servers_list", self, "_on_update_servers_list")
+	$EasyLANClient.connect("connection_ok", self, "_on_connection_ok")
 	$header/back_btn.connect("pressed", self, "back_btn_pressed")
 	var deck_list := DeckList.new()
 	var i = 0
@@ -39,6 +45,3 @@ func _ready():
 		if deck_name == deck_list.default_deck:
 			$deck_selector/select.select(i)
 		i += 1
-
-
-

@@ -216,7 +216,9 @@ func name_changed(new_name):
 	$content/side_panels/cards/scroll/list.get_child(index).get_node("name").text = new_name
 
 static func open_file():
-	OS.shell_open(ProjectSettings.globalize_path(DeckList.PATH))
+	var path = ProjectSettings.globalize_path(DeckList.PATH)
+	print("Opening config file at %s" % path)
+	OS.shell_open(path)
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -228,7 +230,7 @@ func _ready() -> void:
 	$header/open_file.connect("pressed", self, "open_file")
 	$content/side_panels/cards/add.connect("pressed", self, "add_card")
 	$content/side_panels/decks/add.connect("pressed", self, "add_deck")
-	$content/workspace/preview/margins/preview.setup(null, CardView.VisibleBy.BOTH, true)
+	$content/workspace/preview/margins/preview.setup_preview(null)
 	$content/side_panels/decks/rename.connect("pressed", self, "rename_deck")
 	$content/workspace/preview/color_picker.connect("color_changed", self, "color_changed")
 	$content/workspace/preview/color_picker.get_picker().hsv_mode = true
