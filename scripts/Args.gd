@@ -20,7 +20,7 @@ func _ready():
 
 	ip = opts.get_value('--ip')
 	port = opts.get_value('--port')
-	is_server = opts.get_value('--server')
+	is_server = default_serv or opts.get_value('--server')
 	var print_help = opts.get_value('--altheim-help')
 
 	if print_help:

@@ -1,7 +1,5 @@
 extends Node
 
-var ArgParser = load("res://scripts/ArgParser.gd")
-
 func _ready() -> void:
 	randomize()
 
