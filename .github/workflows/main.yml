@@ -1,0 +1,78 @@
+name: export and deploy to itch.io
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 3.4.2
+  EXPORT_NAME: altheim
+  ITCHIO_GAME: altheim
+  ITCHIO_USERNAME: altheim
+
+jobs:
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:${{env.GODOT_VERSION}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows
+          godot -v --export "Windows Desktop" build/windows/$EXPORT_NAME.exe
+      - name: Windows deployment to itch.io
+        env: 
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+        run: butler push build/windows $ITCHIO_USERNAME/$ITCHIO_GAME:windows
+
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:${{env.GODOT_VERSION}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Linux Build
+        run: |
+          mkdir -v -p build/linux
+          godot -v --export "Linux/X11" build/linux/$EXPORT_NAME.x86_64
+      - name: Linux deployment to itch.io
+        env: 
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+        run: butler push build/linux $ITCHIO_USERNAME/$ITCHIO_GAME:linux
+
+  export-mac:
+    name: Mac Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:${{env.GODOT_VERSION}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Mac Build
+        run: |
+          mkdir -v -p build/mac
+          godot -v --export "Mac OSX" build/mac/$EXPORT_NAME.zip
+      - name: Mac deployment to itch.io
+        env: 
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+        run: butler push build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
+  
