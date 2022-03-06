@@ -12,6 +12,11 @@ env:
   ITCHIO_GAME: altheim
   ITCHIO_USERNAME: altheim
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ${{github.workspace}}
+
 jobs:
   export-windows:
     name: Windows Export
