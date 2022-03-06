@@ -106,6 +106,10 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Android Build
         working-directory: ${{github.workspace}}
+        env: 
+          ANDROID_KEYSTORE_BASE64: ${{secrets.ANDROID_KEYSTORE_BASE64}}
+          ANDROID_KEYSTORE_USER: ${{secrets.ANDROID_KEYSTORE_USER}}
+          ANDROID_KEYSTORE_PASSWORD: ${{secrets.ANDROID_KEYSTORE_PASSWORD}}
         run: |
           echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > /tmp/release.keystore
           mkdir -v -p build/android
