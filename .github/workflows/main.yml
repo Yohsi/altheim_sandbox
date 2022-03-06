@@ -28,7 +28,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
-          godot -v --export "Windows Desktop" build/windows/$EXPORT_NAME.exe
+          godot -v --export "Windows release" build/windows/$EXPORT_NAME.exe
       - name: Windows deployment to itch.io
         env: 
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
@@ -49,7 +49,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
-          godot -v --export "Linux/X11" build/linux/$EXPORT_NAME.x86_64
+          godot -v --export "Linux release" build/linux/$EXPORT_NAME.x86_64
       - name: Linux deployment to itch.io
         env: 
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
@@ -70,7 +70,7 @@ jobs:
       - name: Mac Build
         run: |
           mkdir -v -p build/mac
-          godot -v --export "Mac OSX" build/mac/$EXPORT_NAME.zip
+          godot -v --export "MacOS release" build/mac/$EXPORT_NAME.zip
       - name: Mac deployment to itch.io
         env: 
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
