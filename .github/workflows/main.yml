@@ -82,7 +82,7 @@ jobs:
       - name: Unzip exported game
         working-directory: ${{github.workspace}}/build/mac
         run: |
-          sudo apt install unzip
+          apt install unzip
           unzip $EXPORT_NAME.zip
           rm $EXPORT_NAME.zip
       - name: Mac deployment to itch.io
@@ -111,6 +111,13 @@ jobs:
           ANDROID_KEYSTORE_USER: ${{secrets.ANDROID_KEYSTORE_USER}}
           ANDROID_KEYSTORE_PASSWORD: ${{secrets.ANDROID_KEYSTORE_PASSWORD}}
         run: |
+          cat ~/.config/godot/editor_settings-3.tres
+          echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-3.tres
+          echo 'export/android/debug_keystore = "/root/debug.keystore"' >> ~/.config/godot/editor_settings-3.tres
+          echo 'export/android/debug_keystore_user = "androiddebugkey"' >> ~/.config/godot/editor_settings-3.tres
+          echo 'export/android/debug_keystore_pass = "android"' >> ~/.config/godot/editor_settings-3.tres
+          cat ~/.config/godot/editor_settings-3.tres
+          
           echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > /tmp/release.keystore
           mkdir -v -p build/android
           sed 's@keystore/release=".*"@keystore/release="'/tmp/release.keystore'"@g' -i export_presets.cfg
