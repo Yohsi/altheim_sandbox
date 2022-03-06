@@ -82,7 +82,6 @@ jobs:
       - name: Unzip exported game
         working-directory: ${{github.workspace}}/build/mac
         run: |
-          apt install unzip
           unzip $EXPORT_NAME.zip
           rm $EXPORT_NAME.zip
       - name: Mac deployment to itch.io
