@@ -119,7 +119,7 @@ jobs:
           echo 'export/android/timestamping_authority_url = ""' >> ~/.config/godot/editor_settings-3.tres
           echo 'export/android/shutdown_adb_on_exit = true' >> ~/.config/godot/editor_settings-3.tres
           
-          echo '$ANDROID_KEYSTORE_BASE64' | base64 --decode > /root/release.keystore
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > /root/release.keystore
           ls -l /root/release.keystore
           mkdir -v -p build/android
           sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
