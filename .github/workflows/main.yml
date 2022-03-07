@@ -13,82 +13,82 @@ env:
   ITCHIO_USERNAME: altheim
 
 jobs:
-  export-windows:
-    name: Windows Export
-    runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.2
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        working-directory: ${{github.workspace}}
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Windows Build
-        working-directory: ${{github.workspace}}
-        run: |
-          mkdir -v -p build/windows
-          godot -v --export "Windows release" build/windows/$EXPORT_NAME.exe
-      - name: Windows deployment to itch.io
-        working-directory: ${{github.workspace}}
-        env: 
-          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
-        run: butler push build/windows $ITCHIO_USERNAME/$ITCHIO_GAME:windows
+#   export-windows:
+#     name: Windows Export
+#     runs-on: ubuntu-latest
+#     container:
+#       image: barichello/godot-ci:3.4.2
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Setup
+#         working-directory: ${{github.workspace}}
+#         run: |
+#           mkdir -v -p ~/.local/share/godot/templates
+#           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+#       - name: Windows Build
+#         working-directory: ${{github.workspace}}
+#         run: |
+#           mkdir -v -p build/windows
+#           godot -v --export "Windows release" build/windows/$EXPORT_NAME.exe
+#       - name: Windows deployment to itch.io
+#         working-directory: ${{github.workspace}}
+#         env: 
+#           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+#         run: butler push build/windows $ITCHIO_USERNAME/$ITCHIO_GAME:windows
 
-  export-linux:
-    name: Linux Export
-    runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.2
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        working-directory: ${{github.workspace}}
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Linux Build
-        working-directory: ${{github.workspace}}
-        run: |
-          mkdir -v -p build/linux
-          godot -v --export "Linux release" build/linux/$EXPORT_NAME.x86_64
-      - name: Linux deployment to itch.io
-        working-directory: ${{github.workspace}}
-        env: 
-          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
-        run: butler push build/linux $ITCHIO_USERNAME/$ITCHIO_GAME:linux
+#   export-linux:
+#     name: Linux Export
+#     runs-on: ubuntu-latest
+#     container:
+#       image: barichello/godot-ci:3.4.2
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Setup
+#         working-directory: ${{github.workspace}}
+#         run: |
+#           mkdir -v -p ~/.local/share/godot/templates
+#           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+#       - name: Linux Build
+#         working-directory: ${{github.workspace}}
+#         run: |
+#           mkdir -v -p build/linux
+#           godot -v --export "Linux release" build/linux/$EXPORT_NAME.x86_64
+#       - name: Linux deployment to itch.io
+#         working-directory: ${{github.workspace}}
+#         env: 
+#           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+#         run: butler push build/linux $ITCHIO_USERNAME/$ITCHIO_GAME:linux
 
-  export-mac:
-    name: Mac Export
-    runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.2
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        working-directory: ${{github.workspace}}
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Mac Build
-        working-directory: ${{github.workspace}}
-        run: |
-          mkdir -v -p build/mac
-          godot -v --export "MacOS release" build/mac/$EXPORT_NAME.zip
-      - name: Unzip exported game
-        working-directory: ${{github.workspace}}/build/mac
-        run: |
-          unzip $EXPORT_NAME.zip
-          rm $EXPORT_NAME.zip
-      - name: Mac deployment to itch.io
-        working-directory: ${{github.workspace}}
-        env: 
-          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
-        run: butler push build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
+#   export-mac:
+#     name: Mac Export
+#     runs-on: ubuntu-latest
+#     container:
+#       image: barichello/godot-ci:3.4.2
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Setup
+#         working-directory: ${{github.workspace}}
+#         run: |
+#           mkdir -v -p ~/.local/share/godot/templates
+#           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+#       - name: Mac Build
+#         working-directory: ${{github.workspace}}
+#         run: |
+#           mkdir -v -p build/mac
+#           godot -v --export "MacOS release" build/mac/$EXPORT_NAME.zip
+#       - name: Unzip exported game
+#         working-directory: ${{github.workspace}}/build/mac
+#         run: |
+#           unzip $EXPORT_NAME.zip
+#           rm $EXPORT_NAME.zip
+#       - name: Mac deployment to itch.io
+#         working-directory: ${{github.workspace}}
+#         env: 
+#           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+#         run: butler push build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
 
   export-android:
     name: Android Export
@@ -110,7 +110,7 @@ jobs:
           ANDROID_KEYSTORE_USER: ${{secrets.ANDROID_KEYSTORE_USER}}
           ANDROID_KEYSTORE_PASSWORD: ${{secrets.ANDROID_KEYSTORE_PASSWORD}}
         run: |
-          godot -e -q
+          godot -p -q
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-3.tres
           echo 'export/android/debug_keystore = "/root/debug.keystore"' >> ~/.config/godot/editor_settings-3.tres
           echo 'export/android/debug_keystore_user = "androiddebugkey"' >> ~/.config/godot/editor_settings-3.tres
@@ -119,7 +119,8 @@ jobs:
           echo 'export/android/timestamping_authority_url = ""' >> ~/.config/godot/editor_settings-3.tres
           echo 'export/android/shutdown_adb_on_exit = true' >> ~/.config/godot/editor_settings-3.tres
           
-          echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > /root/release.keystore
+          echo '$ANDROID_KEYSTORE_BASE64' | base64 --decode > /root/release.keystore
+          ls -l /root/release.keystore
           mkdir -v -p build/android
           sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
           sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
