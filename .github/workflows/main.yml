@@ -120,12 +120,19 @@ jobs:
           echo 'export/android/shutdown_adb_on_exit = true' >> ~/.config/godot/editor_settings-3.tres
           
           echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > /root/release.keystore
+          
           ls -l /root/release.keystore
           mkdir -v -p build/android
           sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
-          sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
-          sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PASSWORD'"@g' -i export_presets.cfg
-          godot -v --export "Android release" build/android/$EXPORT_NAME.apk
+          
+          apt-get update
+          apt-get install xxd
+          xxd -p /root/release.keystore
+          cat export_presets.cfg
+          
+#          sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
+#          sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PASSWORD'"@g' -i export_presets.cfg
+#          godot -v --export "Android release" build/android/$EXPORT_NAME.apk
       - name: Android deployment to itch.io
         working-directory: ${{github.workspace}}
         env: 
