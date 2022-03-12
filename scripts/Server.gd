@@ -15,7 +15,7 @@ var in_lobby = []
 signal games_updated(games)
 
 func _ready() -> void:
-	if OS.has_feature("Server") or "--server" in OS.get_cmdline_args():
+	if Args.is_server:
 		start_server()
 	else:
 		start_client()
