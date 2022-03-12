@@ -10,7 +10,7 @@ env:
   EXPORT_NAME: altheim
   ITCHIO_GAME: altheim
   ITCHIO_USERNAME: altheim
-  VERSON: ${{github.ref_name}}
+  VERSION: ${{github.ref_name}}
 
 jobs:
   export-windows:
