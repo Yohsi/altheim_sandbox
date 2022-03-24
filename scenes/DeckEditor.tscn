@@ -40,9 +40,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 5 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="header" type="HBoxContainer" parent="."]
 margin_right = 1900.0
@@ -263,13 +260,14 @@ margin_bottom = 34.0
 custom_fonts/font = ExtResource( 1 )
 text = "Type"
 
-[node name="edit" type="LineEdit" parent="content/workspace/editor/grid/type"]
+[node name="edit" type="OptionButton" parent="content/workspace/editor/grid/type"]
 margin_top = 38.0
 margin_right = 439.0
-margin_bottom = 82.0
+margin_bottom = 78.0
 custom_fonts/font = ExtResource( 1 )
-caret_blink = true
-caret_blink_speed = 0.5
+text = "Lieu"
+items = [ "Lieu", null, false, 0, null, "Créature", null, false, 1, null, "Construction", null, false, 2, null, "Divinité", null, false, 3, null, "Miracle", null, false, 4, null ]
+selected = 0
 
 [node name="constraints" type="VBoxContainer" parent="content/workspace/editor/grid"]
 margin_top = 97.0
