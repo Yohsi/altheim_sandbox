@@ -10,7 +10,8 @@ var CardEntry = preload("res://scenes/CardEntry.tscn")
 func save_card() -> bool:
 	if index == null:
 		return false
-	var type = CardType.from_str($content/workspace/editor/grid/type/edit.text)
+	var idx = $content/workspace/editor/grid/type/edit.get_selected_id()
+	var type = CardType.from_str($content/workspace/editor/grid/type/edit.get_item_text(idx))
 
 	if (type == null):
 		return false
@@ -57,7 +58,10 @@ func load_card() -> void:
 		return
 	var card = decks.default()[index]
 	$content/workspace/editor/grid/name/edit.text = card.name
-	$content/workspace/editor/grid/type/edit.text = CardType.to_str(card.type)
+	for idx in $content/workspace/editor/grid/type/edit.get_item_count():
+		if $content/workspace/editor/grid/type/edit.get_item_text(idx) == CardType.to_str(card.type):
+			$content/workspace/editor/grid/type/edit.select(idx)
+#	$content/workspace/editor/grid/type/edit.text = CardType.to_str(card.type)
 	$content/workspace/editor/grid/subtype/edit.text = card.subtypes
 	$content/workspace/editor/grid/attack/edit.text = str(card.atk)
 	$content/workspace/editor/grid/defense/edit.text = str(card.def)
