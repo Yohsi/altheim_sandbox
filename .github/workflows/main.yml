@@ -12,6 +12,10 @@ env:
   ITCHIO_USERNAME: altheim
   VERSION: ${{github.ref_name}}
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   export-windows:
     name: Windows Export
