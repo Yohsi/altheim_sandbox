@@ -6,5 +6,8 @@ func _ready() -> void:
 	if Args.is_server:
 		get_tree().change_scene("res://scenes/Server.tscn")
 	else:
-		get_tree().change_scene("res://scenes/MainMenu.tscn")
+		var config = ConfigFile.new()
+		config.load("user://preference.cfg")
+		OS.window_fullscreen = config.get_value("preferences", "full_screen", true)
+		get_tree().change_scene("res://scenes/menus/MainMenu.tscn")
 

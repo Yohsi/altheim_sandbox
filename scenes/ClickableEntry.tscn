@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/normal.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/header.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/duplicate.png" type="Texture" id=2]
+[ext_resource path="res://assets/delete.png" type="Texture" id=3]
 
 [node name="entry" type="HBoxContainer"]
 anchor_right = 1.0
@@ -12,20 +13,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="name" type="Label" parent="."]
-margin_right = 1855.0
+[node name="name" type="Button" parent="."]
+margin_right = 1826.0
 margin_bottom = 1080.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
-align = 1
-valign = 1
+flat = true
 clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="duplicate_container" type="MarginContainer" parent="."]
+margin_left = 1831.0
+margin_right = 1873.0
+margin_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.2
+custom_constants/margin_right = 3
+custom_constants/margin_top = 3
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
+
+[node name="duplicate" type="Button" parent="duplicate_container"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 1077.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+custom_fonts/font = ExtResource( 1 )
+icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="remove_container" type="MarginContainer" parent="."]
-margin_left = 1860.0
-margin_right = 1885.0
+margin_left = 1878.0
+margin_right = 1920.0
 margin_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -38,41 +69,13 @@ custom_constants/margin_bottom = 3
 [node name="remove" type="Button" parent="remove_container"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 22.0
-margin_bottom = 1077.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-custom_fonts/font = ExtResource( 2 )
-text = "-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="add_container" type="MarginContainer" parent="."]
-margin_left = 1890.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_stretch_ratio = 0.2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
-
-[node name="add" type="Button" parent="add_container"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 27.0
+margin_right = 39.0
 margin_bottom = 1077.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
-custom_fonts/font = ExtResource( 2 )
-text = "+"
+custom_fonts/font = ExtResource( 1 )
+icon = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,246 +1,161 @@
 extends Control
 
-var decks: DeckList
-var index = null
-var deck_names = []
-var deck_index = null
+var deck_list: DeckList = DeckList.new()
+var current_deck = null
+
+onready var deck_list_node = $content/left/decks/scroll/list
+onready var add_deck_btn_node = $content/left/decks/add
+onready var deck_name_node = $content/left/deck/title
+onready var card_list_node = $content/left/deck/scroll/list
+onready var name_edit_node = $content/left/deck/name_edit
+onready var rename_btn_node = $content/left/deck/rename
 
 var CardEntry = preload("res://scenes/CardEntry.tscn")
+var ClickableEntry = preload("res://scenes/ClickableEntry.tscn")
 
-func save_card() -> bool:
-	if index == null:
-		return false
-	var idx = $content/workspace/editor/grid/type/edit.get_selected_id()
-	var type = CardType.from_str($content/workspace/editor/grid/type/edit.get_item_text(idx))
-
-	if (type == null):
-		return false
-	var card = {
-		"name": $content/workspace/editor/grid/name/edit.text,
-		"atk": int($content/workspace/editor/grid/attack/edit.text),
-		"def": int($content/workspace/editor/grid/defense/edit.text),
-		"description": $content/workspace/editor/description/edit.text,
-		"subtypes": $content/workspace/editor/grid/subtype/edit.text,
-		"constraints": $content/workspace/editor/grid/constraints/edit.text,
-		"type": type,
-		"color": $content/workspace/preview/color_picker.color
-	}
-	decks.default()[index] = card
-	$content/workspace/preview/margins/preview.card = card
-	return true
-
-func change_card(new_index: int) -> void:
-	save_card()
-	if index != null:
-		var old = get_node("content/side_panels/cards/scroll/list/card_entry_%d/name" % index)
-		old.set("custom_colors/font_color", Color.white)
-	index = new_index
-	var new = get_node("content/side_panels/cards/scroll/list/card_entry_%d/name" % index)
-	new.set("custom_colors/font_color", Color.darkorange)
-	load_card()
-
-func change_deck(new_index: int) -> void:
-	save_card()
-	if deck_index != null:
-		var old = get_node("content/side_panels/decks/scroll/list/deck_entry_%d/name" % deck_index)
-		old.set("custom_colors/font_color", Color.white)
-	deck_index = new_index
-	var new = get_node("content/side_panels/decks/scroll/list/deck_entry_%d/name" % deck_index)
-	new.set("custom_colors/font_color", Color.darkorange)
-	$content/side_panels/decks/name.text = deck_names[new_index]
-	decks.default_deck = deck_names[new_index]
-	index = null
-	load_deck()
-
-func load_card() -> void:
-	if index == null:
-		clear_card()
-		return
-	var card = decks.default()[index]
-	$content/workspace/editor/grid/name/edit.text = card.name
-	for idx in $content/workspace/editor/grid/type/edit.get_item_count():
-		if $content/workspace/editor/grid/type/edit.get_item_text(idx) == CardType.to_str(card.type):
-			$content/workspace/editor/grid/type/edit.select(idx)
-#	$content/workspace/editor/grid/type/edit.text = CardType.to_str(card.type)
-	$content/workspace/editor/grid/subtype/edit.text = card.subtypes
-	$content/workspace/editor/grid/attack/edit.text = str(card.atk)
-	$content/workspace/editor/grid/defense/edit.text = str(card.def)
-	$content/workspace/editor/grid/constraints/edit.text = str(card.constraints)
-	$content/workspace/editor/description/edit.text = card.description
-	$content/workspace/preview/margins/preview.card = card
-	$content/workspace/preview/color_picker.color = card.color
-
-func clear_card() -> void:
-	$content/workspace/editor/grid/name/edit.text = ""
-	$content/workspace/editor/grid/type/edit.text = ""
-	$content/workspace/editor/grid/subtype/edit.text = ""
-	$content/workspace/editor/grid/attack/edit.text = ""
-	$content/workspace/editor/grid/defense/edit.text = ""
-	$content/workspace/editor/grid/constraints/edit.text = ""
-	$content/workspace/editor/description/edit.text = ""
-	$content/workspace/preview/color_picker.color = Color.white
 
 func back_btn_pressed():
-	get_tree().change_scene("res://scenes/Main.tscn")
+	get_tree().change_scene("res://scenes/menus/MainMenu.tscn")
+
 
 func save():
-	save_card()
-	decks.write()
+	deck_list.write()
 	load_deck()
+
 
 func add_deck() -> void:
 	var i = 1
-	while decks.decks.has("deck%d"%i):
+	while deck_list.decks.has("deck%d"%i):
 		i += 1
-	decks.decks["deck%d"%i] = []
-	decks.default_deck = "deck%d"%i
+	deck_list.decks["deck%d"%i] = []
 	load_decks()
 
-func add_card() -> void:
-	decks.default().append({
-		"name": "",
-		"atk": 0,
-		"def": 0,
-		"description": "",
-		"subtypes": "",
-		"constraints": "",
-		"type": CardType.Creature,
-		"color": DeckList.get_default_color(CardType.Creature)
-	})
+
+func add_card(id, nb) -> void:
+	if current_deck == null:
+		return
+	var deck :Dictionary = deck_list.decks[current_deck]
+	if not deck.has(id):
+		deck[id] = nb
+	else:
+		deck[id] += nb
+	if deck[id] <= 0:
+		deck.erase(id)
 	load_deck()
 
 
-func duplicate_card(i) -> void:
-	var deck := decks.default()
-	deck.insert(i+1, deck[i])
-	load_deck()
-
-func duplicate_deck(i) -> void:
-	var name: String = deck_names[i]
+func duplicate_deck(name) -> void:
 	var name_strip: String = name
 	while not name_strip.empty() and String(name_strip[len(name_strip)-1]).is_valid_integer():
 		name_strip = name_strip.left(len(name_strip)-1)
 
 	var n = 2
-	while decks.decks.has("%s%d" % [name_strip, n]):
+	while deck_list.decks.has("%s%d" % [name_strip, n]):
 		n += 1
-	decks.decks["%s%d" % [name_strip, n]] = decks.decks[name].duplicate(true)
+	deck_list.decks["%s%d" % [name_strip, n]] = deck_list.decks[name].duplicate(true)
 	load_decks()
 
 
-func remove_card(i) -> void:
-	var deck := decks.default()
-	deck.remove(i)
-	if index != null && index >= i and len(deck) > 0:
-		index -=1
-	if index != null && index == -1:
-		index = null
+func remove_deck(name: String) -> void:
+	deck_list.decks.erase(name)
+	if current_deck == name:
+		current_deck = null
+	load_decks()
+
+
+func change_deck(new_name: String) -> void:
+	if current_deck != null:
+		var old = deck_list_node.get_node("%s/name" % current_deck)
+		Util.set_font_color(old, Color.white)
+	current_deck = new_name
+	var new = deck_list_node.get_node("%s/name" % current_deck)
+	Util.set_font_color(new, Color.darkorange)
 	load_deck()
-
-func remove_deck(i) -> void:
-	decks.decks.erase(deck_names[i])
-	deck_names.remove(i)
-	if deck_index == i:
-		index = null
-		if len(decks.decks) == 0:
-			decks.default_deck = ""
-			deck_index = null
-		else:
-			deck_index = max(0, deck_index - 1)
-			decks.default_deck = deck_names[deck_index]
-	if deck_index != null && deck_index > i and len(deck_names) > 0:
-		deck_index -=1
-	if deck_index != null && deck_index == -1:
-		deck_index = null
-	load_decks()
 
 
 func load_deck() -> void:
-	Util.delete_children($content/side_panels/cards/scroll/list)
-	var i := 0
-	for c in decks.default():
+	Util.delete_children(card_list_node)
+	if current_deck == null:
+		deck_name_node.text = "Aucun deck sélectionné"
+		name_edit_node.text = ""
+		return
+	var deck = deck_list.decks[current_deck]
+	for id in deck:
+		var card = deck_list.cards[id]
 		var card_entry = CardEntry.instance()
-		$content/side_panels/cards/scroll/list.add_child(card_entry)
-		card_entry.name = "card_entry_%d" % i
-		card_entry.get_node("name").text = c.name
-		card_entry.get_node("name").connect("pressed", self, "change_card", [i])
-		card_entry.get_node("remove_container/remove").connect("pressed", self, "remove_card", [i])
-		card_entry.get_node("duplicate_container/duplicate").connect("pressed", self, "duplicate_card", [i])
-		i += 1
-	if index != null and index >= i:
-		index = null
-	load_card()
-	$content/side_panels/cards/title.text = "Cartes (%d)" % len(decks.default())
+		card_list_node.add_child(card_entry)
+		card_entry.name = "card_entry_%d" % id
+		card_entry.get_node("name").text = "%s (%d)" % [card.name, deck[id]]
+		card_entry.get_node("add_container/add").connect("pressed", self, "add_card", [id, 1])
+		card_entry.get_node("remove_container/remove").connect("pressed", self, "add_card", [id, -1])
+	deck_name_node.text = "%s (%d)" % [current_deck, deck_list.deck_length(current_deck)]
+	name_edit_node.text = current_deck
+
 
 func load_decks() -> void:
-	Util.delete_children($content/side_panels/decks/scroll/list)
-	deck_names.clear()
-	var i := 0
-	for name in decks.decks:
-		deck_names.append(name)
-		var deck_entry = CardEntry.instance()
-		$content/side_panels/decks/scroll/list.add_child(deck_entry)
-		deck_entry.name = "deck_entry_%d" % i
+	Util.delete_children(deck_list_node)
+	var current_deck_exists = false
+	for name in deck_list.decks:
+		var deck_entry = ClickableEntry.instance()
+		deck_list_node.add_child(deck_entry)
+		deck_entry.name = name
 		deck_entry.get_node("name").text = name
-		deck_entry.get_node("name").connect("pressed", self, "change_deck", [i])
-		deck_entry.get_node("remove_container/remove").connect("pressed", self, "remove_deck", [i])
-		deck_entry.get_node("duplicate_container/duplicate").connect("pressed", self, "duplicate_deck", [i])
-		if decks.default_deck == name:
-			deck_index = i
+		deck_entry.get_node("name").connect("pressed", self, "change_deck", [name])
+		deck_entry.get_node("remove_container/remove").connect("pressed", self, "remove_deck", [name])
+		deck_entry.get_node("duplicate_container/duplicate").connect("pressed", self, "duplicate_deck", [name])
+		if current_deck == name:
 			deck_entry.get_node("name").set("custom_colors/font_color", Color.darkorange)
-			$content/side_panels/decks/name.text = name
-		i += 1
-	if deck_index != null and deck_index >= i:
-		deck_index = null
-	else:
-		load_deck()
+			current_deck_exists = true
+	if not current_deck_exists:
+		current_deck = null
+	load_deck()
+
 
 func rename_deck():
-	if deck_index == null:
+	if current_deck == null:
 		return
-	var new_name : String = $content/side_panels/decks/name.text
-	if decks.decks.has(new_name):
-		return
-	var current_deck_name = deck_names[deck_index]
-	decks.decks[new_name] = decks.default()
-	decks.default_deck = new_name
-	deck_names[deck_index] = new_name
-	decks.decks.erase(current_deck_name)
-	var node = get_node("content/side_panels/decks/scroll/list/deck_entry_%d/name" % deck_index)
-	node.text = new_name
 
-func color_changed(color: Color):
-	if index == null:
-		return
-	$content/workspace/preview/margins/preview/card/front/background.color = color
+	var new_name : String = name_edit_node.text
 
-func name_changed(new_name):
-	if index == null:
+	if deck_list.decks.has(new_name):
+		name_edit_node.set("custom_colors/font_color", Color.red)
 		return
-	$content/side_panels/cards/scroll/list.get_child(index).get_node("name").text = new_name
+	name_edit_node.set("custom_colors/font_color", Color.white)
+
+	deck_list.decks[new_name] = deck_list.decks[current_deck]
+	deck_list.decks.erase(current_deck)
+
+	if deck_list.default_deck == current_deck:
+		deck_list.default_deck = new_name
+
+	var entry = deck_list_node.get_node(current_deck)
+	entry.name = new_name
+	var name_node = entry.get_node("name")
+	name_node.text = new_name
+
+	deck_name_node.text = "%s (%d)" % [new_name, deck_list.deck_length(new_name)]
+
+	current_deck = new_name
+
 
 static func open_file():
-	var path = ProjectSettings.globalize_path(DeckList.PATH)
-	print("Opening config file at %s" % path)
-	OS.shell_open(path)
+	DeckList.open_file()
+
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
 		back_btn_pressed()
 
+
 func _ready() -> void:
 	$header/back_btn.connect("pressed", self, "back_btn_pressed")
 	$header/save_btn.connect("pressed", self, "save")
 	$header/open_file.connect("pressed", self, "open_file")
-	$content/side_panels/cards/add.connect("pressed", self, "add_card")
-	$content/side_panels/decks/add.connect("pressed", self, "add_deck")
-	$content/workspace/preview/margins/preview.setup_preview(null)
-	$content/side_panels/decks/rename.connect("pressed", self, "rename_deck")
-	$content/workspace/preview/color_picker.connect("color_changed", self, "color_changed")
-	$content/workspace/preview/color_picker.get_picker().hsv_mode = true
-	$content/workspace/editor/grid/name/edit.connect("text_changed", self, "name_changed")
-	decks = DeckList.new()
+	add_deck_btn_node.connect("pressed", self, "add_deck")
+	rename_btn_node.connect("pressed", self, "rename_deck")
+	$content/collection_view.connect("card_clicked", self, "add_card", [1])
 	load_decks()
+
 
 func _exit_tree() -> void:
 	save()

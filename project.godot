@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "CardRarity",
+"language": "GDScript",
+"path": "res://scripts/CardRarity.gd"
+}, {
+"base": "Reference",
 "class": "CardType",
 "language": "GDScript",
 "path": "res://scripts/CardType.gd"
@@ -29,10 +34,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/EasyLAN/EasyLANNetworkManager.gd"
 }, {
+"base": "Container",
+"class": "FlexGridContainer",
+"language": "GDScript",
+"path": "res://scripts/ResponsiveGrid.gd"
+}, {
 "base": "Panel",
 "class": "NetworkSync",
 "language": "GDScript",
-"path": "res://scripts/NetworkSync.gd"
+"path": "res://scripts/menus/NetworkSync.gd"
 }, {
 "base": "Node",
 "class": "Server",
@@ -45,10 +55,12 @@ _global_script_classes=[ {
 "path": "res://scripts/Util.gd"
 } ]
 _global_script_class_icons={
+"CardRarity": "",
 "CardType": "",
 "CardView": "",
 "DeckList": "",
 "EasyLANNetworkManager": "",
+"FlexGridContainer": "",
 "NetworkSync": "",
 "Server": "",
 "Util": ""

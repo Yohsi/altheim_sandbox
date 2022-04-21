@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scripts/LanMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/title.tres" type="DynamicFont" id=2]
-[ext_resource path="res://styles/background_style.tres" type="StyleBox" id=4]
+[ext_resource path="res://scripts/menus/PlayMenu.gd" type="Script" id=3]
 
 [sub_resource type="InputEventAction" id=1]
 action = "ui_cancel"
@@ -13,8 +13,8 @@ shortcut = SubResource( 1 )
 [node name="lan_menu" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 4 )
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,17 +44,17 @@ margin_bottom = 64.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
-text = "Jouer en LAN"
+text = "Jouer"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="menu" type="VBoxContainer" parent="."]
-anchor_left = 0.269958
-anchor_top = 0.0448519
-anchor_right = 0.730042
-anchor_bottom = 0.935185
+anchor_left = 0.212667
+anchor_top = 0.182815
+anchor_right = 0.787854
+anchor_bottom = 0.797222
 margin_left = -0.320007
 margin_top = -0.440002
 margin_right = 0.319946
@@ -67,19 +67,44 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="host_btn" type="Button" parent="menu"]
-margin_top = 366.0
-margin_right = 884.0
-margin_bottom = 466.0
-rect_min_size = Vector2( 0, 100 )
-custom_fonts/font = ExtResource( 2 )
-text = "Créer une partie"
-
-[node name="join_btn" type="Button" parent="menu"]
-margin_top = 495.0
-margin_right = 884.0
-margin_bottom = 595.0
+[node name="online_btn" type="Button" parent="menu"]
+margin_top = 152.0
+margin_right = 1104.0
+margin_bottom = 252.0
 grow_horizontal = 0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 2 )
-text = "Rejoindre une partie"
+text = "Jouer en ligne"
+
+[node name="hbox" type="HBoxContainer" parent="menu"]
+margin_top = 281.0
+margin_right = 1104.0
+margin_bottom = 381.0
+custom_constants/separation = 25
+
+[node name="host_btn" type="Button" parent="menu/hbox"]
+margin_right = 539.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Créer un salon en LAN"
+
+[node name="join_btn" type="Button" parent="menu/hbox"]
+margin_left = 564.0
+margin_right = 1104.0
+margin_bottom = 100.0
+grow_horizontal = 0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Rejoindre un salon en LAN"
+
+[node name="local_btn" type="Button" parent="menu"]
+margin_top = 410.0
+margin_right = 1104.0
+margin_bottom = 510.0
+grow_horizontal = 0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 2 )
+text = "Jouer en local"

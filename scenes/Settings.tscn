@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/Settings.gd" type="Script" id=2]
+[ext_resource path="res://assets/title.tres" type="DynamicFont" id=3]
+
+[sub_resource type="InputEventAction" id=6]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=7]
+shortcut = SubResource( 6 )
+
+[node name="settings" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="header" type="HBoxContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_btn" type="Button" parent="header"]
+margin_right = 91.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+custom_fonts/font = ExtResource( 3 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 7 )
+text = "<"
+
+[node name="title" type="Label" parent="header"]
+margin_left = 95.0
+margin_top = 3.0
+margin_right = 1920.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Préférences"
+align = 1
+
+[node name="list" type="VBoxContainer" parent="."]
+anchor_left = 0.059375
+anchor_top = 0.113889
+anchor_right = 0.930208
+anchor_bottom = 0.916667
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="full_screen" type="CheckButton" parent="list"]
+margin_right = 1672.0
+margin_bottom = 42.0
+text = "Plein écran"
+
+[connection signal="pressed" from="header/back_btn" to="." method="back_btn_pressed"]

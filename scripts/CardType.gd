@@ -31,3 +31,18 @@ static func to_str(type) -> String:
 			return "Construction"
 		_:
 			return ""
+
+static func color_of(type):
+	match type:
+		Creature:
+			return Color.khaki
+		Construction:
+			return Color.lightsteelblue
+		Place:
+			return Color.palegreen
+		Divinity:
+			return Color.lightskyblue
+		Miracle:
+			return Color.lightsalmon
+		
+		

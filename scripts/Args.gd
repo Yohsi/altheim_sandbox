@@ -12,7 +12,7 @@ func _ready():
 	var opts = ArgParser.Options.new()
 	opts.set_banner('Altheim client or server.\n' +
 					'Any option that requires a value will take the form of "--<option>=<value>".')
-	opts.add('--ip', '92.157.70.8', 'The IP address of the server. Default 92.157.70.8')
+	opts.add('--ip', '90.112.164.75', 'The IP address of the server. Default 92.157.70.8')
 	opts.add('--port', 34210, 'The port the server listens on. Default 34210')
 	opts.add('--server', default_serv, 'Run the server. Default %s' % default_serv)
 	opts.add('--altheim-help', false, 'Print this help')

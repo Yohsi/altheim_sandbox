@@ -7,7 +7,7 @@ signal raise_preview()
 enum VisibleBy {BOTH, NOBODY, ME}
 
 var card setget set_card
-var preview := false
+export var preview := false
 var clicking := false
 var click_position: Vector2
 var initial_position: Vector2
@@ -18,12 +18,26 @@ var visible_by = VisibleBy.NOBODY
 var rotated_landscape = false
 var local_game = false setget set_local_game
 
+onready var overlay_node = $card/front/overlay
+onready var name_node = $card/front/name
+onready var extension_node = $card/front/extension
+onready var rarity_node = $card/front/rarity
+onready var visibility_node = $card/front/visibity_indicator
+onready var subtypes_node = $card/front/subtypes
+onready var description_container_node = $card/front/description_container
+onready var description_node = description_container_node.get_node("description")
+onready var devotions_node = $card/front/devotions
+onready var constraints_node = $card/front/constraints
+onready var type_node = $card/front/type
+onready var atk_node = $card/front/atk
+onready var def_node = $card/front/def
+
 var opponent_id: int # the id of the remote player (not related to the card ownership)
 
 func set_local_game(b):
 	local_game = b
 	if local_game:
-		$card/front/visibity_indicator.visible = false
+		visibility_node.visible = false
 
 func set_card(new_card) -> void:
 	card = new_card
@@ -52,28 +66,32 @@ func rpc_unreliable_or_call(f, arg = null):
 func update_card_info():
 	if (card == null):
 		return
-	$card/front/name.text = card.name
-	$card/front/description_container.visible = card.description != ""
-	$card/front/description_container/description.text = card.description
-	$card/front/atk.text = str(card.atk)
-	$card/front/def.text = str(card.def)
-	$card/front/atk.visible = card.type == CardType.Creature or card.type == CardType.Construction
-	$card/front/def.visible = card.type == CardType.Creature or card.type == CardType.Construction
-	$card/front/constraints.text = card.constraints
-	$card/front/subtypes.text = card.subtypes
-	$card/front/type.text = CardType.to_str(card.type)
+	name_node.text = card.name
+	description_container_node.visible = card.description != ""
+	description_node.text = card.description
+	atk_node.text = str(card.atk)
+	def_node.text = str(card.def)
+	atk_node.visible = card.type == CardType.Creature or card.type == CardType.Construction
+	def_node.visible = card.type == CardType.Creature or card.type == CardType.Construction
+	constraints_node.text = card.constraints
+	subtypes_node.text = card.subtypes
+	type_node.text = CardType.to_str(card.type)
+	rarity_node.text = CardRarity.to_str(card.rarity)[0]
+	rarity_node.set("custom_colors/font_color", CardRarity.color_of(card.rarity))
+	extension_node.text = card.extension[0]
+	devotions_node.text = card.devotions
 
 	match card.type:
 		CardType.Creature:
-			$card/front/overlay.texture = load("res://assets/creature_front.png")
+			overlay_node.texture = load("res://assets/creature_front.png")
 		CardType.Construction:
-			$card/front/overlay.texture = load("res://assets/creature_front.png")
+			overlay_node.texture = load("res://assets/creature_front.png")
 		CardType.Place:
-			$card/front/overlay.texture = load("res://assets/place_front.png")
+			overlay_node.texture = load("res://assets/place_front.png")
 		CardType.Divinity:
-			$card/front/overlay.texture = load("res://assets/divinity_front.png")
+			overlay_node.texture = load("res://assets/divinity_front.png")
 		CardType.Miracle:
-			$card/front/overlay.texture = load("res://assets/miracle_front.png")
+			overlay_node.texture = load("res://assets/miracle_front.png")
 
 	$card/front/background.color = card.color
 
@@ -81,7 +99,7 @@ func update_card_info():
 func setup_preview(p_card):
 	self.visible_by = VisibleBy.BOTH
 	self.preview = true
-	$card/front/visibity_indicator.visible = false
+	visibility_node.visible = false
 	flip_card(true)
 	self.card = p_card
 
@@ -225,8 +243,8 @@ func update_visibility():
 			rpc_or_call("flip_card", false)
 			flip_card(true)
 			visible_by = VisibleBy.ME
-			$card/front/visibity_indicator.set("custom_colors/font_color", Color("f45940"))
-			$card/front/visibity_indicator.text = "Caché"
+			visibility_node.set("custom_colors/font_color", Color("f45940"))
+			visibility_node.text = "Caché"
 		VisibleBy.NOBODY:
 			rpc_or_call("flip_card", false)
 
@@ -235,8 +253,8 @@ remote func flip_card(visible: bool):
 	$card/back.visible = not visible
 	$card/front.visible = visible
 	if visible:
-		$card/front/visibity_indicator.set("custom_colors/font_color", Color("58f74f"))
-		$card/front/visibity_indicator.text = "Visible"
+		visibility_node.set("custom_colors/font_color", Color("58f74f"))
+		visibility_node.text = "Visible"
 
 remote func set_card_position(pos:Vector2):
 	if not local_game:
@@ -249,8 +267,8 @@ remote func rotate_card(landscape: bool):
 	set_rotation(-PI/2 if landscape else 0.0)
 
 remote func add_def(amount: int):
-	var new_def = int($card/front/def.text) + amount
-	$card/front/def.text = str(new_def)
+	var new_def = int(def_node.text) + amount
+	def_node.text = str(new_def)
 	var color
 	if new_def > card.def:
 		color = Color.forestgreen
@@ -258,11 +276,11 @@ remote func add_def(amount: int):
 		color = Color.crimson
 	else:
 		color = Color.black
-	$card/front/def.set("custom_colors/font_color", color)
+	def_node.set("custom_colors/font_color", color)
 
 remote func add_atk(amount: int):
-	var new_atk = int($card/front/atk.text) + amount
-	$card/front/atk.text = str(new_atk)
+	var new_atk = int(atk_node.text) + amount
+	atk_node.text = str(new_atk)
 	var color
 	if new_atk > card.atk:
 		color = Color.forestgreen
@@ -270,7 +288,7 @@ remote func add_atk(amount: int):
 		color = Color.crimson
 	else:
 		color = Color.black
-	$card/front/atk.set("custom_colors/font_color", color)
+	atk_node.set("custom_colors/font_color", color)
 
 func _ready() -> void:
 	set_process_input(not preview)

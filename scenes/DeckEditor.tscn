@@ -1,67 +1,60 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scripts/DeckEditor.gd" type="Script" id=2]
+[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/title.tres" type="DynamicFont" id=3]
-[ext_resource path="res://scenes/CardView.tscn" type="PackedScene" id=4]
-[ext_resource path="res://styles/background_style.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/CollectionView.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/header.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scripts/DeckEditor.gd" type="Script" id=7]
 
-[sub_resource type="InputEventAction" id=1]
+[sub_resource type="InputEventAction" id=10]
 action = "ui_cancel"
 
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 10 )
 
-[sub_resource type="InputEventAction" id=3]
+[sub_resource type="InputEventAction" id=11]
 action = "ui_save"
 
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 11 )
 
-[sub_resource type="InputEventAction" id=5]
+[sub_resource type="InputEventAction" id=8]
 action = "ui_new"
 
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-resource_local_to_scene = true
-resource_name = "CardViewStyle"
-draw_center = false
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
+[sub_resource type="ShortCut" id=9]
+shortcut = SubResource( 8 )
 
 [node name="deck_editor" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 5 )
-script = ExtResource( 2 )
+theme = ExtResource( 4 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="header" type="HBoxContainer" parent="."]
-margin_right = 1900.0
-margin_bottom = 56.0
+margin_right = 1920.0
+margin_bottom = 68.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="back_btn" type="Button" parent="header"]
-margin_right = 75.0
-margin_bottom = 67.0
+margin_right = 76.0
+margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.05
 custom_fonts/font = ExtResource( 3 )
 shortcut_in_tooltip = false
-shortcut = SubResource( 2 )
+shortcut = SubResource( 4 )
 text = "<"
 
 [node name="title" type="Label" parent="header"]
-margin_left = 79.0
+margin_left = 80.0
 margin_top = 3.0
-margin_right = 1592.0
+margin_right = 1612.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
@@ -69,50 +62,53 @@ text = "Modification des decks"
 align = 1
 
 [node name="open_file" type="Button" parent="header"]
-margin_left = 1596.0
-margin_right = 1720.0
-margin_bottom = 67.0
+margin_left = 1616.0
+margin_right = 1740.0
+margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.05
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
 text = "Voir le fichier"
 
 [node name="save_btn" type="Button" parent="header"]
-margin_left = 1724.0
-margin_right = 1900.0
-margin_bottom = 67.0
+margin_left = 1744.0
+margin_right = 1920.0
+margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.05
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
-shortcut = SubResource( 4 )
+shortcut = SubResource( 5 )
 text = "Enregistrer (Ctrl+S)"
 
 [node name="content" type="HSplitContainer" parent="."]
-margin_top = 60.0
-margin_right = 1900.0
-margin_bottom = 1060.0
+margin_left = 8.0
+margin_top = 73.0
+margin_right = 1912.0
+margin_bottom = 1070.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
-split_offset = 300
+split_offset = -147
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="side_panels" type="HSplitContainer" parent="content"]
-margin_right = 603.0
-margin_bottom = 1000.0
+[node name="left" type="HBoxContainer" parent="content"]
+margin_right = 800.0
+margin_bottom = 997.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="decks" type="VBoxContainer" parent="content/side_panels"]
-margin_right = 295.0
-margin_bottom = 1000.0
+[node name="decks" type="VBoxContainer" parent="content/left"]
+margin_right = 398.0
+margin_bottom = 997.0
 size_flags_horizontal = 3
 custom_constants/separation = 5
 
-[node name="title" type="Label" parent="content/side_panels/decks"]
-margin_right = 295.0
+[node name="title" type="Label" parent="content/left/decks"]
+margin_right = 398.0
 margin_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -124,285 +120,82 @@ align = 1
 clip_text = true
 uppercase = true
 
-[node name="scroll" type="ScrollContainer" parent="content/side_panels/decks"]
+[node name="scroll" type="ScrollContainer" parent="content/left/decks"]
 margin_top = 42.0
-margin_right = 295.0
-margin_bottom = 859.0
+margin_right = 398.0
+margin_bottom = 946.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="list" type="VBoxContainer" parent="content/side_panels/decks/scroll"]
-margin_right = 295.0
-margin_bottom = 817.0
+[node name="list" type="VBoxContainer" parent="content/left/decks/scroll"]
+margin_right = 398.0
+margin_bottom = 904.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="name" type="LineEdit" parent="content/side_panels/decks"]
-margin_top = 864.0
-margin_right = 295.0
-margin_bottom = 908.0
-custom_fonts/font = ExtResource( 1 )
-caret_blink = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="rename" type="Button" parent="content/side_panels/decks"]
-margin_top = 913.0
-margin_right = 295.0
-margin_bottom = 954.0
+[node name="add" type="Button" parent="content/left/decks"]
+margin_top = 951.0
+margin_right = 398.0
+margin_bottom = 997.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
-text = "Renommer"
+shortcut = SubResource( 9 )
+text = "Ajouter (Ctrl+N)"
 
-[node name="add" type="Button" parent="content/side_panels/decks"]
-margin_top = 959.0
-margin_right = 295.0
-margin_bottom = 1000.0
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-custom_fonts/font = ExtResource( 1 )
-shortcut_in_tooltip = false
-text = "Nouveau deck "
-
-[node name="cards" type="VBoxContainer" parent="content/side_panels"]
-margin_left = 307.0
-margin_right = 603.0
-margin_bottom = 1000.0
+[node name="deck" type="VBoxContainer" parent="content/left"]
+margin_left = 402.0
+margin_right = 800.0
+margin_bottom = 997.0
 size_flags_horizontal = 3
 custom_constants/separation = 5
 
-[node name="title" type="Label" parent="content/side_panels/cards"]
-margin_right = 296.0
+[node name="title" type="Label" parent="content/left/deck"]
+margin_right = 398.0
 margin_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 6 )
-text = "Cartes"
 align = 1
-clip_text = true
+autowrap = true
 uppercase = true
 
-[node name="scroll" type="ScrollContainer" parent="content/side_panels/cards"]
+[node name="scroll" type="ScrollContainer" parent="content/left/deck"]
 margin_top = 42.0
-margin_right = 296.0
+margin_right = 398.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="list" type="VBoxContainer" parent="content/left/deck/scroll"]
+margin_right = 398.0
+margin_bottom = 858.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="name_edit" type="LineEdit" parent="content/left/deck"]
+margin_top = 905.0
+margin_right = 398.0
 margin_bottom = 949.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+caret_blink = true
 
-[node name="list" type="VBoxContainer" parent="content/side_panels/cards/scroll"]
-margin_right = 296.0
-margin_bottom = 907.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="add" type="Button" parent="content/side_panels/cards"]
+[node name="rename" type="Button" parent="content/left/deck"]
 margin_top = 954.0
-margin_right = 296.0
-margin_bottom = 1000.0
+margin_right = 398.0
+margin_bottom = 997.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
-shortcut = SubResource( 6 )
-text = "Ajouter (Ctrl+N)"
+text = "Renommer"
 
-[node name="workspace" type="HBoxContainer" parent="content"]
-margin_left = 613.0
-margin_right = 1900.0
-margin_bottom = 1000.0
-
-[node name="editor" type="VBoxContainer" parent="content/workspace"]
-margin_right = 893.0
-margin_bottom = 1000.0
-size_flags_horizontal = 3
-custom_constants/separation = 15
-
-[node name="grid" type="GridContainer" parent="content/workspace/editor"]
-margin_right = 893.0
-margin_bottom = 276.0
-custom_constants/vseparation = 15
-custom_constants/hseparation = 15
-columns = 2
-
-[node name="name" type="VBoxContainer" parent="content/workspace/editor/grid"]
-margin_right = 439.0
-margin_bottom = 82.0
-size_flags_horizontal = 3
-
-[node name="label" type="Label" parent="content/workspace/editor/grid/name"]
-margin_right = 439.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 1 )
-text = "Nom"
-
-[node name="edit" type="LineEdit" parent="content/workspace/editor/grid/name"]
-margin_top = 38.0
-margin_right = 439.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 1 )
-caret_blink = true
-caret_blink_speed = 0.5
-
-[node name="type" type="VBoxContainer" parent="content/workspace/editor/grid"]
-margin_left = 454.0
-margin_right = 893.0
-margin_bottom = 82.0
-size_flags_horizontal = 3
-
-[node name="label" type="Label" parent="content/workspace/editor/grid/type"]
-margin_right = 439.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 1 )
-text = "Type"
-
-[node name="edit" type="OptionButton" parent="content/workspace/editor/grid/type"]
-margin_top = 38.0
-margin_right = 439.0
-margin_bottom = 78.0
-custom_fonts/font = ExtResource( 1 )
-text = "Lieu"
-items = [ "Lieu", null, false, 0, null, "Créature", null, false, 1, null, "Construction", null, false, 2, null, "Divinité", null, false, 3, null, "Miracle", null, false, 4, null ]
-selected = 0
-
-[node name="constraints" type="VBoxContainer" parent="content/workspace/editor/grid"]
-margin_top = 97.0
-margin_right = 439.0
-margin_bottom = 179.0
-size_flags_horizontal = 3
-
-[node name="label" type="Label" parent="content/workspace/editor/grid/constraints"]
-margin_right = 439.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 1 )
-text = "Contraintes"
-
-[node name="edit" type="LineEdit" parent="content/workspace/editor/grid/constraints"]
-margin_top = 38.0
-margin_right = 439.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 1 )
-caret_blink = true
-caret_blink_speed = 0.5
-
-[node name="subtype" type="VBoxContainer" parent="content/workspace/editor/grid"]
-margin_left = 454.0
-margin_top = 97.0
-margin_right = 893.0
-margin_bottom = 179.0
-size_flags_horizontal = 3
-
-[node name="label" type="Label" parent="content/workspace/editor/grid/subtype"]
-margin_right = 439.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 1 )
-text = "Sous-types"
-
-[node name="edit" type="LineEdit" parent="content/workspace/editor/grid/subtype"]
-margin_top = 38.0
-margin_right = 439.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 1 )
-caret_blink = true
-caret_blink_speed = 0.5
-
-[node name="attack" type="VBoxContainer" parent="content/workspace/editor/grid"]
-margin_top = 194.0
-margin_right = 439.0
-margin_bottom = 276.0
-size_flags_horizontal = 3
-
-[node name="label" type="Label" parent="content/workspace/editor/grid/attack"]
-margin_right = 439.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 1 )
-text = "Attaque"
-
-[node name="edit" type="LineEdit" parent="content/workspace/editor/grid/attack"]
-margin_top = 38.0
-margin_right = 439.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 1 )
-caret_blink = true
-caret_blink_speed = 0.5
-
-[node name="defense" type="VBoxContainer" parent="content/workspace/editor/grid"]
-margin_left = 454.0
-margin_top = 194.0
-margin_right = 893.0
-margin_bottom = 276.0
-size_flags_horizontal = 3
-
-[node name="label" type="Label" parent="content/workspace/editor/grid/defense"]
-margin_right = 439.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 1 )
-text = "Défense"
-
-[node name="edit" type="LineEdit" parent="content/workspace/editor/grid/defense"]
-margin_top = 38.0
-margin_right = 439.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 1 )
-caret_blink = true
-caret_blink_speed = 0.5
-
-[node name="description" type="VBoxContainer" parent="content/workspace/editor"]
-margin_top = 291.0
-margin_right = 893.0
-margin_bottom = 1000.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="label" type="Label" parent="content/workspace/editor/description"]
-margin_right = 893.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 1 )
-text = "Description"
-
-[node name="edit" type="TextEdit" parent="content/workspace/editor/description"]
-margin_top = 38.0
-margin_right = 893.0
-margin_bottom = 709.0
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 1 )
-wrap_enabled = true
-
-[node name="preview" type="VBoxContainer" parent="content/workspace"]
-margin_left = 897.0
-margin_right = 1287.0
-margin_bottom = 1000.0
-
-[node name="margins" type="MarginContainer" parent="content/workspace/preview"]
-margin_right = 390.0
-margin_bottom = 918.0
-size_flags_vertical = 3
-custom_constants/margin_right = 195
-custom_constants/margin_left = 195
-
-[node name="preview" parent="content/workspace/preview/margins" instance=ExtResource( 4 )]
-margin_left = 195.0
-margin_right = 195.0
-margin_bottom = 918.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 7 )
-
-[node name="label_color" type="Label" parent="content/workspace/preview"]
-margin_top = 922.0
-margin_right = 390.0
-margin_bottom = 956.0
-custom_fonts/font = ExtResource( 1 )
-text = "Couleur du fond"
-align = 1
-
-[node name="color_picker" type="ColorPickerButton" parent="content/workspace/preview"]
-margin_top = 960.0
-margin_right = 390.0
-margin_bottom = 1000.0
-custom_fonts/font = ExtResource( 1 )
-edit_alpha = false
+[node name="collection_view" parent="content" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 810.0
+margin_right = 1904.0
+margin_bottom = 997.0

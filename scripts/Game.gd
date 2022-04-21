@@ -31,7 +31,7 @@ func on_player_disconnected(id):
 		quit_game()
 
 func quit_game():
-	get_tree().change_scene("res://scenes/Main.tscn")
+	get_tree().change_scene("res://scenes/menus/MainMenu.tscn")
 	queue_free()
 
 func _notification(what):

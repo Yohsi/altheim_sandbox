@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://styles/background_style.tres" type="StyleBox" id=1]
-[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/title.tres" type="DynamicFont" id=3]
-[ext_resource path="res://scripts/StartLocalGame.gd" type="Script" id=4]
+[ext_resource path="res://scripts/menus/LocalMenu.gd" type="Script" id=4]
 
 [sub_resource type="InputEventAction" id=1]
 action = "ui_cancel"
@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -387.334, -201.523 )
 mouse_filter = 1
-custom_styles/panel = ExtResource( 1 )
+theme = ExtResource( 2 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,14 +65,14 @@ __meta__ = {
 [node name="label" type="Label" parent="deck_selector1"]
 margin_right = 472.0
 margin_bottom = 34.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "Sélection de votre deck"
 
 [node name="select" type="OptionButton" parent="deck_selector1"]
 margin_top = 38.0
 margin_right = 472.0
 margin_bottom = 78.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -89,14 +89,14 @@ __meta__ = {
 [node name="label" type="Label" parent="deck_selector2"]
 margin_right = 472.0
 margin_bottom = 34.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "Sélection du deck adverse"
 
 [node name="select" type="OptionButton" parent="deck_selector2"]
 margin_top = 38.0
 margin_right = 472.0
 margin_bottom = 78.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -106,7 +106,7 @@ margin_left = 758.0
 margin_top = 803.0
 margin_right = 1177.0
 margin_bottom = 863.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "Démarrer la partie !"
 __meta__ = {
 "_edit_use_anchors_": false

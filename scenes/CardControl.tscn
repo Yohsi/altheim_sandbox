@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/CardView.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/CardControl.gd" type="Script" id=2]
+
+[sub_resource type="ViewportTexture" id=1]
+flags = 4
+viewport_path = NodePath("viewport")
+
+[node name="card_control" type="AspectRatioContainer"]
+margin_right = 97.0
+margin_bottom = 135.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+ratio = 0.72
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="viewport" type="Viewport" parent="."]
+size = Vector2( 389, 543 )
+size_override_stretch = true
+transparent_bg = true
+handle_input_locally = false
+msaa = 2
+fxaa = true
+usage = 0
+render_target_update_mode = 3
+
+[node name="card" parent="viewport" instance=ExtResource( 1 )]
+
+[node name="texture_rect" type="TextureRect" parent="."]
+margin_right = 97.0
+margin_bottom = 135.0
+rect_min_size = Vector2( 97, 135 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 6
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn" type="Button" parent="."]
+margin_top = 0.138893
+margin_right = 97.0
+margin_bottom = 134.861
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true

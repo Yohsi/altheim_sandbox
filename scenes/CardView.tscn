@@ -6,58 +6,34 @@
 [ext_resource path="res://assets/Asul-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/Asul-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/Catamaran-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/normal.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/Catamaran-Bold.ttf" type="DynamicFontData" id=8]
 
-[sub_resource type="StyleBoxFlat" id=1]
-resource_local_to_scene = true
-resource_name = "CardViewStyle"
-draw_center = false
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-shadow_color = Color( 0.952941, 0.313726, 0.988235, 0.364706 )
-
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 21
-use_mipmaps = true
-use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 28
 use_mipmaps = true
 use_filter = true
 extra_spacing_char = 1
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 17
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 5 )
-
 [sub_resource type="DynamicFont" id=5]
-use_mipmaps = true
-use_filter = true
-extra_spacing_top = -4
-extra_spacing_bottom = -4
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=6]
 size = 18
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 0.356863 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 15
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
@@ -66,31 +42,39 @@ extra_spacing_top = -4
 extra_spacing_bottom = -4
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=4]
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = -4
+extra_spacing_bottom = -4
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 17
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 52
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 
-[node name="card" type="Panel"]
+[node name="card" type="Control"]
 margin_right = 389.0
 margin_bottom = 543.0
+rect_min_size = Vector2( 389, 543 )
 rect_pivot_offset = Vector2( 194, 271 )
-custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="card" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -194.5
-margin_top = -271.5
-margin_right = 194.5
-margin_bottom = 271.5
+margin_top = 1.36111
+margin_right = 389.0
+margin_bottom = 541.639
 rect_pivot_offset = Vector2( 194, 271 )
 mouse_filter = 2
 mouse_default_cursor_shape = 13
@@ -99,6 +83,7 @@ __meta__ = {
 }
 
 [node name="front" type="Control" parent="card"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -131,14 +116,45 @@ __meta__ = {
 
 [node name="name" type="Label" parent="card/front"]
 anchor_left = 0.0359897
-anchor_top = 0.0184162
+anchor_top = 0.0192257
 anchor_right = 0.96144
-anchor_bottom = 0.0644567
+anchor_bottom = 0.067349
 grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
-custom_fonts/font = SubResource( 2 )
-text = "Gorlung Main rouge"
+custom_fonts/font = SubResource( 1 )
+align = 1
+valign = 1
+max_lines_visible = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="extension" type="Label" parent="card/front"]
+anchor_left = 0.0359897
+anchor_top = 0.018509
+anchor_right = 0.107969
+anchor_bottom = 0.0980977
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
+custom_fonts/font = ExtResource( 7 )
+align = 1
+valign = 1
+max_lines_visible = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="rarity" type="Label" parent="card/front"]
+anchor_left = 0.892031
+anchor_top = 0.018509
+anchor_right = 0.96401
+anchor_bottom = 0.0980977
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
+custom_fonts/font = ExtResource( 7 )
 align = 1
 valign = 1
 max_lines_visible = 2
@@ -154,47 +170,10 @@ anchor_bottom = 0.191945
 grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_color = Color( 0.956863, 0.34902, 0.25098, 1 )
-custom_fonts/font = SubResource( 3 )
-text = "caché"
+custom_fonts/font = SubResource( 2 )
 align = 1
 valign = 1
 uppercase = true
-max_lines_visible = 2
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="type" type="Label" parent="card/front"]
-anchor_left = 0.0359897
-anchor_top = 0.933756
-anchor_right = 0.96144
-anchor_bottom = 0.981639
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
-custom_fonts/font = SubResource( 4 )
-text = "Créature"
-align = 1
-valign = 1
-uppercase = true
-max_lines_visible = 2
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="constraints" type="Label" parent="card/front"]
-anchor_left = 0.244216
-anchor_top = 0.90325
-anchor_right = 0.753213
-anchor_bottom = 0.940082
-grow_horizontal = 2
-grow_vertical = 0
-custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
-custom_fonts/font = SubResource( 5 )
-text = "3 Plaines et 2 Orcs"
-align = 1
-valign = 1
-autowrap = true
 max_lines_visible = 2
 __meta__ = {
 "_edit_use_anchors_": true
@@ -208,8 +187,7 @@ anchor_bottom = 0.0998864
 grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
-custom_fonts/font = SubResource( 6 )
-text = "Orc et Chef"
+custom_fonts/font = SubResource( 5 )
 align = 1
 valign = 1
 max_lines_visible = 2
@@ -218,14 +196,15 @@ __meta__ = {
 }
 
 [node name="description_container" type="Panel" parent="card/front"]
+visible = false
 anchor_left = 0.092545
-anchor_top = 0.607735
+anchor_top = 0.584163
 anchor_right = 0.907455
-anchor_bottom = 0.801105
+anchor_bottom = 0.777533
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -239,11 +218,61 @@ margin_right = -8.0
 margin_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 8 )
-text = "Au début de votre tour, la Créature maudite subit 1 blessure"
+custom_fonts/font = SubResource( 7 )
 align = 1
 valign = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="devotions" type="Label" parent="card/front"]
+anchor_left = 0.0848329
+anchor_top = 0.784788
+anchor_right = 0.912596
+anchor_bottom = 0.821806
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
+custom_fonts/font = SubResource( 4 )
+align = 1
+valign = 1
+autowrap = true
+max_lines_visible = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="constraints" type="Label" parent="card/front"]
+anchor_left = 0.244216
+anchor_top = 0.90325
+anchor_right = 0.753213
+anchor_bottom = 0.940082
+grow_horizontal = 2
+grow_vertical = 0
+custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
+custom_fonts/font = SubResource( 4 )
+align = 1
+valign = 1
+autowrap = true
+max_lines_visible = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="type" type="Label" parent="card/front"]
+anchor_left = 0.0359897
+anchor_top = 0.933756
+anchor_right = 0.96144
+anchor_bottom = 0.981639
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0.160784, 0.160784, 0.160784, 1 )
+custom_fonts/font = SubResource( 3 )
+align = 1
+valign = 1
+uppercase = true
+max_lines_visible = 2
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -256,8 +285,8 @@ anchor_bottom = 0.977163
 grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 9 )
-text = "2"
+custom_fonts/font = SubResource( 8 )
+text = "0"
 align = 1
 valign = 1
 __meta__ = {
@@ -272,8 +301,8 @@ anchor_bottom = 0.977163
 grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 9 )
-text = "5"
+custom_fonts/font = SubResource( 8 )
+text = "0"
 align = 1
 valign = 1
 __meta__ = {
