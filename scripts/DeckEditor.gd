@@ -27,7 +27,7 @@ func add_deck() -> void:
 	var i = 1
 	while deck_list.decks.has("deck%d"%i):
 		i += 1
-	deck_list.decks["deck%d"%i] = []
+	deck_list.decks["deck%d"%i] = {}
 	load_decks()
 
 
