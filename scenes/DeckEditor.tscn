@@ -199,3 +199,6 @@ anchor_bottom = 0.0
 margin_left = 810.0
 margin_right = 1904.0
 margin_bottom = 997.0
+size_flags_horizontal = 3
+
+[connection signal="text_entered" from="content/left/deck/name_edit" to="." method="rename_deck"]

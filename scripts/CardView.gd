@@ -78,7 +78,7 @@ func update_card_info():
 	type_node.text = CardType.to_str(card.type)
 	rarity_node.text = CardRarity.to_str(card.rarity)[0]
 	rarity_node.set("custom_colors/font_color", CardRarity.color_of(card.rarity))
-	extension_node.text = card.extension[0]
+	extension_node.text = card.extension[0] if not card.extension.empty() else ""
 	devotions_node.text = card.devotions
 
 	match card.type:

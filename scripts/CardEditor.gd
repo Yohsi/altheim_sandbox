@@ -16,6 +16,7 @@ onready var devotions_node = $content/workspace/editor/grid/devotions/edit
 onready var preview_node = $content/workspace/preview/margins/preview
 onready var color_picker_node = $content/workspace/preview/color_picker
 onready var card_list_node = $content/cards/scroll/list
+onready var sort_mode_node = $content/cards/sort_mode/sort_mode
 
 var ClickableEntry = preload("res://scenes/ClickableEntry.tscn")
 
@@ -117,7 +118,7 @@ func add_card() -> void:
 		"type": CardType.Creature,
 		"color": CardType.color_of(CardType.Creature),
 		"devotions": "",
-		"extension": "",
+		"extension": "Base",
 	})
 	load_card_list()
 	change_card(new_id)
@@ -139,7 +140,10 @@ func load_card_list() -> void:
 	Util.delete_children(card_list_node)
 	var keep_selected = false
 
-	for id in deck_list.cards:
+	var cards = deck_list.cards.keys().duplicate()
+	cards.sort_custom(Util.CardSorter.new(deck_list.cards), sort_mode_node.get_selected_metadata())
+
+	for id in cards:
 		var card = deck_list.cards[id]
 		if id == current_card_id:
 			keep_selected = true
@@ -189,6 +193,19 @@ func _ready() -> void:
 	name_node.connect("text_changed", self, "name_changed")
 	type_node.connect("item_selected", self, "type_changed")
 	deck_list = DeckList.new()
+
+	sort_mode_node.add_item("Type", 0)
+	sort_mode_node.set_item_metadata(0, "type")
+	sort_mode_node.add_item("Nom", 1)
+	sort_mode_node.set_item_metadata(1, "name")
+	sort_mode_node.add_item("Rareté", 2)
+	sort_mode_node.set_item_metadata(2, "rarity")
+	sort_mode_node.add_item("Extension", 3)
+	sort_mode_node.set_item_metadata(3, "extension")
+	sort_mode_node.connect("item_selected", self, "on_sort_changed")
+	load_card_list()
+
+func on_sort_changed(_index):
 	load_card_list()
 
 func type_changed(index):

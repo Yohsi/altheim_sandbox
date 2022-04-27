@@ -3,20 +3,65 @@
 [ext_resource path="res://scripts/ResponsiveGrid.gd" type="Script" id=2]
 [ext_resource path="res://scripts/CollectionView.gd" type="Script" id=3]
 
-[node name="collection_view" type="ScrollContainer"]
+[node name="collection_view" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-scroll_horizontal_enabled = false
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="margin" type="MarginContainer" parent="."]
+[node name="options" type="HBoxContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_constants/separation = 22
+
+[node name="size_label" type="Label" parent="options"]
+margin_top = 3.0
+margin_right = 104.0
+margin_bottom = 17.0
+text = "Taille des cartes"
+
+[node name="size_slider" type="HSlider" parent="options"]
+margin_left = 126.0
+margin_right = 1794.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.3
+max_value = 1.0
+step = 0.001
+value = 0.5
+exp_edit = true
+
+[node name="sort_label" type="Label" parent="options"]
+margin_left = 1816.0
+margin_top = 3.0
+margin_right = 1869.0
+margin_bottom = 17.0
+text = "Trier par"
+
+[node name="sort_mode" type="OptionButton" parent="options"]
+margin_left = 1891.0
+margin_right = 1920.0
+margin_bottom = 20.0
+
+[node name="collection" type="ScrollContainer" parent="."]
+margin_top = 24.0
 margin_right = 1920.0
 margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin" type="MarginContainer" parent="collection"]
+margin_right = 1920.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( -848.858, -156.9 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 20
@@ -24,11 +69,11 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
-[node name="grid" type="Container" parent="margin"]
+[node name="grid" type="Container" parent="collection/margin"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 1060.0
+margin_bottom = 1036.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 2 )

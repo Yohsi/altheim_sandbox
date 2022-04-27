@@ -112,21 +112,38 @@ align = 1
 clip_text = true
 uppercase = true
 
-[node name="scroll" type="ScrollContainer" parent="content/cards"]
+[node name="sort_mode" type="HBoxContainer" parent="content/cards"]
 margin_top = 42.0
 margin_right = 408.0
-margin_bottom = 949.0
+margin_bottom = 82.0
+
+[node name="label" type="Label" parent="content/cards/sort_mode"]
+margin_top = 3.0
+margin_right = 73.0
+margin_bottom = 37.0
+text = "Trier par"
+
+[node name="sort_mode" type="OptionButton" parent="content/cards/sort_mode"]
+margin_left = 77.0
+margin_right = 408.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="scroll" type="ScrollContainer" parent="content/cards"]
+margin_top = 87.0
+margin_right = 408.0
+margin_bottom = 951.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="list" type="VBoxContainer" parent="content/cards/scroll"]
 margin_right = 408.0
-margin_bottom = 907.0
+margin_bottom = 864.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="add" type="Button" parent="content/cards"]
-margin_top = 954.0
+margin_top = 956.0
 margin_right = 408.0
 margin_bottom = 1000.0
 size_flags_vertical = 3

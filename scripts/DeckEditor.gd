@@ -111,13 +111,11 @@ func load_decks() -> void:
 	load_deck()
 
 
-func rename_deck():
+func rename_deck(new_name = name_edit_node.text):
 	if current_deck == null:
 		return
 
-	var new_name : String = name_edit_node.text
-
-	if deck_list.decks.has(new_name):
+	if deck_list.decks.has(new_name) or new_name.empty():
 		name_edit_node.set("custom_colors/font_color", Color.red)
 		return
 	name_edit_node.set("custom_colors/font_color", Color.white)

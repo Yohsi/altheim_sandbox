@@ -1,4 +1,4 @@
-extends ScrollContainer
+extends VBoxContainer
 
 export var card_scale: float = 0.5 setget set_cards_scale
 
@@ -6,12 +6,23 @@ signal card_clicked(id)
 
 var deck_list = DeckList.new()
 var CardControl = preload("res://scenes/CardControl.tscn")
-onready var grid = $margin/grid
+onready var grid = $collection/margin/grid
+onready var size_slider = $options/size_slider
+onready var sort_mode = $options/sort_mode
 
 func _ready() -> void:
-	deck_list.write()
+	sort_mode.add_item("Type", 0)
+	sort_mode.set_item_metadata(0, "type")
+	sort_mode.add_item("Nom", 1)
+	sort_mode.set_item_metadata(1, "name")
+	sort_mode.add_item("Rareté", 2)
+	sort_mode.set_item_metadata(2, "rarity")
+	sort_mode.add_item("Extension", 3)
+	sort_mode.set_item_metadata(3, "extension")
+	sort_mode.connect("item_selected", self, "on_sort_changed")
+
 	var cards = deck_list.cards.keys().duplicate()
-	cards.sort_custom(CardSorter.new(), "type")
+	cards.sort_custom(Util.CardSorter.new(deck_list.cards), sort_mode.get_selected_metadata())
 	for id in cards:
 		var card = deck_list.cards[id]
 		var card_node = CardControl.instance()
@@ -21,9 +32,15 @@ func _ready() -> void:
 		card_node.card_scale = card_scale
 		card_node.connect("clicked", self, "_on_click_card", [id])
 
+	set_cards_scale(size_slider.value)
+	size_slider.connect("value_changed", self, "set_cards_scale")
+
+func on_sort_changed(_index):
+	sort(sort_mode.get_selected_metadata())
+
 func sort(sort_by: String):
 	var cards = deck_list.cards.keys().duplicate()
-	cards.sort_custom(CardSorter.new(), sort_by)
+	cards.sort_custom(Util.CardSorter.new(deck_list.cards), sort_by)
 	for id in cards:
 		var card_node = grid.get_node("card_%d" % id)
 		card_node.raise()
@@ -34,32 +51,3 @@ func set_cards_scale(scale: float):
 
 func _on_click_card(id: int):
 	emit_signal("card_clicked", id)
-
-class CardSorter:
-	var deck_list = DeckList.new()
-
-	func type(key_a, key_b):
-		var a = deck_list.cards[key_a]
-		var b = deck_list.cards[key_b]
-		if a.type == b.type:
-			return a.name < b.name
-		return a.type < b.type
-
-	func rarity(key_a, key_b):
-		var a = deck_list.cards[key_a]
-		var b = deck_list.cards[key_b]
-		if a.rarity == b.rarity:
-			return a.name < b.name
-		return a.rarity < b.rarity
-
-	func extension(key_a, key_b):
-		var a = deck_list.cards[key_a]
-		var b = deck_list.cards[key_b]
-		if a.extension == b.extension:
-			return a.name < b.name
-		return a.extension < b.extension
-
-	func name(key_a, key_b):
-		var a = deck_list.cards[key_a]
-		var b = deck_list.cards[key_b]
-		return a.name < b.name
