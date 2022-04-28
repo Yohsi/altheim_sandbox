@@ -3,6 +3,7 @@ extends VBoxContainer
 export var card_scale: float = 0.5 setget set_cards_scale
 
 signal card_clicked(id)
+signal edit_card_clicked(id)
 
 var deck_list = DeckList.new()
 var CardControl = preload("res://scenes/CardControl.tscn")
@@ -31,6 +32,7 @@ func _ready() -> void:
 		card_node.get_node("viewport/card").setup_preview(card)
 		card_node.card_scale = card_scale
 		card_node.connect("clicked", self, "_on_click_card", [id])
+		card_node.connect("edit_clicked", self, "_on_edit_click_card", [id])
 
 	set_cards_scale(size_slider.value)
 	size_slider.connect("value_changed", self, "set_cards_scale")
@@ -51,3 +53,6 @@ func set_cards_scale(scale: float):
 
 func _on_click_card(id: int):
 	emit_signal("card_clicked", id)
+
+func _on_edit_click_card(id: int):
+	emit_signal("edit_card_clicked", id)

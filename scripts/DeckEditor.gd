@@ -139,6 +139,12 @@ func rename_deck(new_name = name_edit_node.text):
 static func open_file():
 	DeckList.open_file()
 
+func edit_card(id):
+	var scene = load("res://scenes/CardEditor.tscn").instance()
+	scene.current_card_id = id
+	var root = get_tree().get_root()
+	Util.delete_children(root)
+	root.add_child(scene)
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -152,6 +158,7 @@ func _ready() -> void:
 	add_deck_btn_node.connect("pressed", self, "add_deck")
 	rename_btn_node.connect("pressed", self, "rename_deck")
 	$content/collection_view.connect("card_clicked", self, "add_card", [1])
+	$content/collection_view.connect("edit_card_clicked", self, "edit_card")
 	load_decks()
 
 
