@@ -95,7 +95,9 @@ func load_deck() -> void:
 func load_decks() -> void:
 	Util.delete_children(deck_list_node)
 	var current_deck_exists = false
-	for name in deck_list.decks:
+	var decks = deck_list.decks.keys()
+	decks.sort()
+	for name in decks:
 		var deck_entry = ClickableEntry.instance()
 		deck_list_node.add_child(deck_entry)
 		deck_entry.name = name
@@ -126,14 +128,8 @@ func rename_deck(new_name = name_edit_node.text):
 	if deck_list.default_deck == current_deck:
 		deck_list.default_deck = new_name
 
-	var entry = deck_list_node.get_node(current_deck)
-	entry.name = new_name
-	var name_node = entry.get_node("name")
-	name_node.text = new_name
-
-	deck_name_node.text = "%s (%d)" % [new_name, deck_list.deck_length(new_name)]
-
 	current_deck = new_name
+	load_decks()
 
 
 static func open_file():
