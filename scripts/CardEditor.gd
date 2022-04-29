@@ -99,7 +99,9 @@ func clear_card() -> void:
 	devotions_node.text = ""
 
 func back_btn_pressed():
-	get_tree().change_scene("res://scenes/menus/MainMenu.tscn")
+	var tree = get_tree()
+	Util.delete_children(tree.get_root())
+	tree.change_scene("res://scenes/menus/MainMenu.tscn")
 
 func save():
 	save_card()
