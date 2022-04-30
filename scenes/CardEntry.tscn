@@ -12,15 +12,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="name" type="Label" parent="."]
+[node name="name" type="Button" parent="."]
 margin_right = 1855.0
 margin_bottom = 1080.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
-align = 1
-valign = 1
+flat = true
 clip_text = true
 
 [node name="remove_container" type="MarginContainer" parent="."]

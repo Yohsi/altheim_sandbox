@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/CardView.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/CardControl.gd" type="Script" id=2]
@@ -7,6 +7,38 @@
 [sub_resource type="ViewportTexture" id=1]
 flags = 4
 viewport_path = NodePath("viewport")
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture_rect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "focus"
+length = 0.28
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture_rect:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.14, 0.28 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.15, 1.15 ), Vector2( 1, 1 ) ]
+}
 
 [node name="card_control" type="AspectRatioContainer"]
 margin_right = 97.0
@@ -62,3 +94,7 @@ margin_bottom = 30.1389
 size_flags_horizontal = 8
 size_flags_vertical = 0
 icon = ExtResource( 3 )
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/focus = SubResource( 3 )

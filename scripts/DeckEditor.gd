@@ -85,12 +85,19 @@ func load_deck() -> void:
 		var card_entry = CardEntry.instance()
 		card_list_node.add_child(card_entry)
 		card_entry.name = "card_entry_%d" % id
-		card_entry.get_node("name").text = "%s (%d)" % [card.name, deck[id]]
+		var entry_name = card_entry.get_node("name")
+		entry_name.text = "%s (%d)" % [card.name, deck[id]]
+		entry_name.connect("pressed", self, "card_entry_pressed", [id])
 		card_entry.get_node("add_container/add").connect("pressed", self, "add_card", [id, 1])
 		card_entry.get_node("remove_container/remove").connect("pressed", self, "add_card", [id, -1])
 	deck_name_node.text = "%s (%d)" % [current_deck, deck_list.deck_length(current_deck)]
 	name_edit_node.text = current_deck
 
+func card_entry_pressed(id):
+	var scroll = $content/collection_view/collection
+	var card = scroll.get_node("margin/grid/card_%d" % id)
+	scroll.ensure_control_visible(card)
+	card.play_focus_animation()
 
 func load_decks() -> void:
 	Util.delete_children(deck_list_node)
